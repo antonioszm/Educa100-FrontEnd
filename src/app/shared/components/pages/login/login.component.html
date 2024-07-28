@@ -1,16 +1,33 @@
 <div class="container">
     <div class="esquerda">
-        <img src="ducks.png" alt="foto de patinhos">
+        <img src="ducks.png" alt="Desenho de patinhos">
     </div>
     <div class="direita">
-        <div>
-            <h1>Bem Vindo!</h1>
-            <p>Nao tem uma conta? <a href="cadastro">Cadastre-se</a></p>
-        </div>
-        <div>
-           <input type="text" placeholder="nome" class="pergunta">
-           <input type="text" placeholder="senha" class="pergunta">
-           <button class="confirmarLogin">Login</button>
+        <h1>Bem Vindo!</h1>
+        <div class="flex flex-column md:flex-row">
+            <div class="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
+                <div class="flex flex-wrap justify-content-center align-items-center gap-2">
+                    <p-floatLabel class="pergunta">
+                        <input pInputText id="email" type="email"/>
+                        <label for="email">Email</label>
+                    </p-floatLabel>
+                </div>
+                <div class="flex flex-wrap justify-content-center align-items-center gap-2 ">
+                    <p-floatLabel class="pergunta">
+                        <p-password [toggleMask]="true"/>
+                        <label for="password">Senha</label>
+                    </p-floatLabel>
+                </div>
+                <p-button label="Entrar" styleClass="w-10rem mx-auto" />
+            </div>
+            <div class="w-full md:w-2">
+                <p-divider layout="horizontal" styleClass="flex md:hidden" [align]="'center'">
+                    <b>OU</b>
+                </p-divider>
+            </div>
+            <div class="w-full md:w-5 flex align-items-center justify-content-center py-5">
+                <p-button label="Cadastre-se" styleClass="p-button-success w-10rem" />
+            </div>
         </div>
     </div>
 </div>    

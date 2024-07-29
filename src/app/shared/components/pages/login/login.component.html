@@ -4,21 +4,26 @@
     </div>
     <div class="direita">
         <h1>Bem Vindo!</h1>
+        <div *ngIf="erro" class="erro">{{ erro }}</div>
         <div class="flex flex-column md:flex-row">
             <div class="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
                 <div class="flex flex-wrap justify-content-center align-items-center gap-2">
                     <p-floatLabel class="pergunta">
-                        <input pInputText id="email" type="email"/>
+                        <input pInputText id="email" type="email" [(ngModel)]="email"/>
                         <label for="email">Email</label>
                     </p-floatLabel>
                 </div>
+
                 <div class="flex flex-wrap justify-content-center align-items-center gap-2 ">
                     <p-floatLabel class="pergunta">
-                        <p-password [toggleMask]="true"/>
+                        <p-password [(ngModel)]="senha" [toggleMask]="true"/>
                         <label for="password">Senha</label>
                     </p-floatLabel>
                 </div>
-                <p-button label="Entrar" styleClass="w-10rem mx-auto" />
+                <div class="recuperacao" >
+                    <a href="recuperacao">Esqueci minha senha </a>
+                </div>
+                <p-button label="Entrar" styleClass="w-10rem mx-auto" (click)="verificarLogin()" />
             </div>
             <div class="w-full md:w-2">
                 <p-divider layout="horizontal" styleClass="flex md:hidden" [align]="'center'">

@@ -32,6 +32,24 @@ body, html {
       h1 {
         margin: 0;
       }
+            
+      .recuperacao{
+        a{
+          color: #80a77e;
+        }
+        font-size: small;
+        margin-bottom: 25px;
+        justify-content: left;
+      }
+
+      .erro{
+        padding: 10px;
+        border: 1px solid rgb(255, 45, 45);
+        border-radius: 10px;
+        background-color: rgb(255, 45, 45);
+        color: #f0f0f0;
+        font-weight: bolder;
+      }
 
       p-divider{
         padding: 10%;

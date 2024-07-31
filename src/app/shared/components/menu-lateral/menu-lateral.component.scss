@@ -1,0 +1,17 @@
+p-sidebar{
+    .links{
+        a{
+            padding: 10%;
+            text-decoration: none;
+            color: rgb(36, 36, 36);
+        }
+    }
+
+    .logout{
+        display: flex;
+        size: 50px;
+        padding-top: 100%;
+        margin-top: 100%;
+        justify-content: center;
+    }
+}

@@ -1,0 +1,22 @@
+<p-sidebar [(visible)]="sidebarVisible">
+    <h3>Outras Páginas</h3>
+    <div class="links">
+        <a href="home" ><span class="pi pi-home"></span>Página inicial</a>
+        <br>
+        <a href="cadastro-docente"><span class="pi pi-pencil"></span>Cadastro de Docentes</a>
+        <br>
+        <a href="cadastro-aluno"><span class="pi pi-pencil"></span>Cadastro de Alunos</a>
+        <br>
+        <a href="cadastro-turma"><span class="pi pi-pencil"></span>Cadastro de Turma</a>
+        <br>
+        <a href="cadastro-avaliacao"><span class="pi pi-pencil"></span>Cadastro de Avaliação</a>
+        <br>
+        <a href="listagem-docentes"><span class="pi pi-pencil"></span>Listagem de Docentes</a>
+        <br>
+        <a href="notas"><span class="pi pi-address-book"></span> Listagem de Docentes</a>
+    </div>
+    <div class="logout">
+        <p-button (onClick)="deslogar()" icon="pi pi-sign-out" />
+    </div>
+</p-sidebar>
+<p-button (onClick)="tornaVisivel()" icon="pi pi-bars" />

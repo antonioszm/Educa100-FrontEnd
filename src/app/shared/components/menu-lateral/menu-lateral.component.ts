@@ -12,7 +12,8 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './menu-lateral.component.scss'
 })
 export class MenuLateralComponent {
-  private authService!: AuthService;
+
+  constructor(private authService: AuthService){}
 
   sidebarVisible: boolean = false;
   deslogar(){

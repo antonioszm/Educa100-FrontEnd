@@ -3,14 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { User } from '../models/user.model.js';
-
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private apiUrl = 'http://localhost:3000/users';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   login(email: string, senha: string): Observable<boolean> {
     return this.http.get<User[]>(`${this.apiUrl}?email=${email}`) 
@@ -29,6 +29,7 @@ export class AuthService {
     }
     logout() {
       localStorage.removeItem('usuariologado');
+      this.router.navigate(['/login']);
     }
   
     loginValido(): boolean {

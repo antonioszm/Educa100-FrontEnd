@@ -5,14 +5,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { SidebarModule } from 'primeng/sidebar';
 import { MenuLateralComponent } from './shared/components/menu-lateral/menu-lateral.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
-//import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ToolbarComponent } from './shared/components/toolbar/toolbar.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ButtonModule, CommonModule, HttpClientModule, SidebarModule, MenuLateralComponent, AppComponent],
+  imports: [RouterOutlet, ButtonModule, CommonModule, HttpClientModule, SidebarModule,ToolbarComponent, MenuLateralComponent, AppComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

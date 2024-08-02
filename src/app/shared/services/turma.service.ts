@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class TurmasService {
+export class TurmaService {
   private turmasUrl = 'http://localhost:3000/turmas'; 
 
   httpOptions = {

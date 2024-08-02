@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TurmasService } from './turma.service';
+import { TurmaService } from './turma.service';
 
-describe('TurmasService', () => {
-  let service: TurmasService;
+describe('TurmaService', () => {
+  let service: TurmaService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(TurmasService);
+    service = TestBed.inject(TurmaService);
   });
 
   it('should be created', () => {

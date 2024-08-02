@@ -3,6 +3,14 @@
       { "id": 1, "email": "antonioszm@outlook.com", "senha": "123", "papel": "ALUNO"},
       { "id": 2, "email": "professor@outlook.com", "senha": "123", "papel": "DOCENTE"},
       { "id": 3, "email": "adm@adimins.com", "senha": "12345", "papel": "ADM" }
+    ],
+
+    "turmas": [
+
+    ],
+
+    "notas": [
+
     ]
   }
   

@@ -35,4 +35,31 @@ export class AuthService {
     loginValido(): boolean {
       return !!localStorage.getItem('usuariologado');
     }
+
+    verificarSeForAluno(){
+      const usuarioLogado = localStorage.getItem('usuariologado');
+      if (usuarioLogado) {
+        const user = JSON.parse(usuarioLogado) as User;
+        return user.papel === 'ALUNO';
+      }
+      return false;    
+    }
+
+    verificarSeForDocente(){
+      const usuarioLogado = localStorage.getItem('usuariologado');
+      if (usuarioLogado) {
+        const user = JSON.parse(usuarioLogado) as User;
+        return user.papel === 'DOCENTE';
+      }
+      return false;    
+    }
+    
+    verificarSeForADM(){
+      const usuarioLogado = localStorage.getItem('usuariologado');
+      if (usuarioLogado) {
+        const user = JSON.parse(usuarioLogado) as User;
+        return user.papel === 'ADM';
+      }
+      return false;    
+    }
 }

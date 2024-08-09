@@ -4,11 +4,14 @@ import { TurmaService } from '../../../services/turma.service';
 import { PanelModule } from 'primeng/panel';
 import { CardModule } from 'primeng/card';
 import { SplitterModule } from 'primeng/splitter';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [PanelModule,CardModule, SplitterModule],
+  imports: [PanelModule,CardModule, SplitterModule, CommonModule, CardModule, FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -19,6 +22,7 @@ export class HomeComponent {
     numeroDeAlunos!: number;
     numeroDeDocentes!: number;
     numeroDeTurmas!: number;
+    filtroAluno: string = '';
     
     constructor(private userService: UserService, private turmaService: TurmaService){}
 
@@ -52,4 +56,25 @@ export class HomeComponent {
       this.numeroDeTurmas = this.listaDeTurmas.length
       return this.numeroDeTurmas  
     }
+    filtrarAlunos(): any[] {
+      if (!this.filtroAluno) {
+        return this.listaDeAlunos;
+      }
+
+      const filtroLower = this.filtroAluno.toLowerCase();
+
+      return this.listaDeAlunos.filter(aluno =>
+        aluno.nomeCompleto.toLowerCase().includes(filtroLower) ||
+        aluno.telefone?.includes(filtroLower) ||
+        aluno.email?.toLowerCase().includes(filtroLower)
+      );
+    }
+
+    calcularIdade(dataDeNascimento: Date): number {
+      const nascimento = new Date(dataDeNascimento);
+      const diferenca = Date.now() - nascimento.getTime();
+      const idade = new Date(diferenca).getUTCFullYear() - 1970;
+      return idade;
+    }
+
 }

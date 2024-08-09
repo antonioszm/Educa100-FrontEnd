@@ -29,7 +29,7 @@ export class UserService {
   }
 
   listarDocentes(): Observable<any[]> {
-    const url = `${this.usersUrl}?papel=ALUNO`;
+    const url = `${this.usersUrl}?papel=DOCENTE`;
     return this.http.get<any[]>(url);
   }
 

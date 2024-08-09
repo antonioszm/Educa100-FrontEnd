@@ -1,19 +1,39 @@
-<div class="primeiraSecao">
+<div class="SecaoDocente">
     <h2>Dados:</h2>
     <div>
         <div class="dados-conteiner">
             <div class="dados">
-                <p>{{ numeroDeAlunos }}</p>
-                <h3>Número de Alunos</h3>
+                <p-card>
+                  <p>{{ numeroDeAlunos }}</p>
+                  <h3>Número de Alunos</h3>
+                </p-card>
               </div>
               <div class="dados">
-                <p>{{ numeroDeDocentes }}</p>
-                <h3>Número de Docentes</h3>
+                  <p-card>
+                    <p>{{ numeroDeDocentes }}</p>
+                    <h3>Número de Docentes</h3>
+                  </p-card>
               </div>
               <div class="dados">
-                <p>{{ numeroDeTurmas }}</p>
-                <h3>Número de Turmas</h3>
+                  <p-card>
+                    <p>{{ numeroDeTurmas }}</p>
+                    <h3>Número de Turmas</h3>
+                  </p-card>
               </div>
         </div>
     </div>
+    <h2>Pesquisar Aluno:</h2>
+    <div>
+      <input type="text" placeholder="Buscar por nome, telefone ou e-mail" [(ngModel)]="filtroAluno" />
+  </div>
+  <div class="alunos-listagem">
+    <p-card *ngFor="let aluno of filtrarAlunos()" header="{{ aluno.nomeCompleto }}" subheader="Idade: {{ calcularIdade(aluno.dataDeNascimento) }} anos">
+        <ng-template pTemplate="content">
+            <p>Contato: {{ aluno.telefone || aluno.email }}</p>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <p>Colocar Botoes de acordo com o Papel</p>
+        </ng-template>
+    </p-card>
+</div>
 </div>

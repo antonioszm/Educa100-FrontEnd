@@ -103,7 +103,7 @@
       
 
       { "id": 2, "email": "professor@outlook.com", "senha": "123", "papel": "DOCENTE"},
-      { "id": 3, "email": "adm@adimins.com", "senha": "12345", "papel": "ADM" }
+      { "id": 3, "email": "adm", "senha": "12345", "papel": "ADM" }
     ],
 
     "turmas": [
@@ -111,6 +111,171 @@
     ],
 
     "notas": [
+      {
+        "id": 1,
+        "professor": {
+          "id": 10,
+          "nomeCompleto": "Professor A",
+          "email": "professora@escola.com",
+          "papel": "DOCENTE",
+          "genero": "Feminino",
+          "dataDeNascimento": "1975-05-15",
+          "cpf": "123.456.789-00",
+          "rg": "12.345.678-9",
+          "telefone": "(11) 98765-4321",
+          "naturalidade": "São Paulo, SP",
+          "endereco": {
+            "cep": "01001-000",
+            "cidade": "São Paulo",
+            "estado": "SP",
+            "logradouro": "Rua A",
+            "numero": "100",
+            "complemento": "Apto 10",
+            "bairro": "Centro",
+            "pontoDeReferencia": "Próximo à praça"
+          },
+          "turmas": [],
+          "materias": "Matemática"
+        },
+        "nomeDaMateria": "Matemática",
+        "nomeDaAvaliacao": "Prova 1",
+        "dataAvaliacao": "2023-06-10",
+        "aluno": {
+          "id": 1,
+          "nomeCompleto": "Antonio Silva",
+          "email": "antonioszm@outlook.com",
+          "papel": "ALUNO",
+          "genero": "Masculino",
+          "dataDeNascimento": "1998-04-22",
+          "cpf": "123.456.789-00",
+          "rg": "12.345.678-9",
+          "telefone": "(11) 98765-4321",
+          "naturalidade": "São Paulo, SP",
+          "endereco": {
+            "cep": "01001-000",
+            "cidade": "São Paulo",
+            "estado": "SP",
+            "logradouro": "Rua A",
+            "numero": "100",
+            "complemento": "Apto 10",
+            "bairro": "Centro",
+            "pontoDeReferencia": "Próximo à praça"
+          },
+          "turmas": [],
+          "materias": "Matemática, Física"
+        },
+        "nota": 8.5
+      },
+      {
+        "id": 2,
+        "professor": {
+          "id": 11,
+          "nomeCompleto": "Professor B",
+          "email": "professorb@escola.com",
+          "papel": "DOCENTE",
+          "genero": "Masculino",
+          "dataDeNascimento": "1970-08-20",
+          "cpf": "987.654.321-00",
+          "rg": "98.765.432-1",
+          "telefone": "(21) 91234-5678",
+          "naturalidade": "Rio de Janeiro, RJ",
+          "endereco": {
+            "cep": "20000-000",
+            "cidade": "Rio de Janeiro",
+            "estado": "RJ",
+            "logradouro": "Rua B",
+            "numero": "200",
+            "complemento": "Casa 2",
+            "bairro": "Botafogo",
+            "pontoDeReferencia": "Perto do shopping"
+          },
+          "turmas": [],
+          "materias": "História"
+        },
+        "nomeDaMateria": "História",
+        "nomeDaAvaliacao": "Prova 2",
+        "dataAvaliacao": "2023-06-15",
+        "aluno": {
+          "id": 1,
+          "nomeCompleto": "Antonio Silva",
+          "email": "antonioszm@outlook.com",
+          "papel": "ALUNO",
+          "genero": "Masculino",
+          "dataDeNascimento": "1998-04-22",
+          "cpf": "123.456.789-00",
+          "rg": "12.345.678-9",
+          "telefone": "(11) 98765-4321",
+          "naturalidade": "São Paulo, SP",
+          "endereco": {
+            "cep": "01001-000",
+            "cidade": "São Paulo",
+            "estado": "SP",
+            "logradouro": "Rua A",
+            "numero": "100",
+            "complemento": "Apto 10",
+            "bairro": "Centro",
+            "pontoDeReferencia": "Próximo à praça"
+          },
+          "turmas": [],
+          "materias": "Matemática, Física"
+        },
+        "nota": 7.0
+      },
+      {
+        "id": 3,
+        "professor": {
+          "id": 12,
+          "nomeCompleto": "Professor C",
+          "email": "professorc@escola.com",
+          "papel": "DOCENTE",
+          "genero": "Masculino",
+          "dataDeNascimento": "1980-03-10",
+          "cpf": "333.444.555-66",
+          "rg": "33.444.555-6",
+          "telefone": "(31) 92345-6789",
+          "naturalidade": "Belo Horizonte, MG",
+          "endereco": {
+            "cep": "30000-000",
+            "cidade": "Belo Horizonte",
+            "estado": "MG",
+            "logradouro": "Rua C",
+            "numero": "300",
+            "complemento": "",
+            "bairro": "Savassi",
+            "pontoDeReferencia": "Ao lado da padaria"
+          },
+          "turmas": [],
+          "materias": "Geografia"
+        },
+        "nomeDaMateria": "Geografia",
+        "nomeDaAvaliacao": "Prova 3",
+        "dataAvaliacao": "2023-07-01",
+        "aluno": {
+          "id": 1,
+          "nomeCompleto": "Antonio Silva",
+          "email": "antonioszm@outlook.com",
+          "papel": "ALUNO",
+          "genero": "Masculino",
+          "dataDeNascimento": "1998-04-22",
+          "cpf": "123.456.789-00",
+          "rg": "12.345.678-9",
+          "telefone": "(11) 98765-4321",
+          "naturalidade": "São Paulo, SP",
+          "endereco": {
+            "cep": "01001-000",
+            "cidade": "São Paulo",
+            "estado": "SP",
+            "logradouro": "Rua A",
+            "numero": "100",
+            "complemento": "Apto 10",
+            "bairro": "Centro",
+            "pontoDeReferencia": "Próximo à praça"
+          },
+          "turmas": [],
+          "materias": "Matemática, Física"
+        },
+        "nota": 9.0
+      }
 
     ]
   }

@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import type { Notas } from '../models/notas.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   private usersUrl = 'http://localhost:3000/users'; 
+  private notasUrl = 'http://localhost:3000/notas';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -31,6 +33,11 @@ export class UserService {
   listarDocentes(): Observable<any[]> {
     const url = `${this.usersUrl}?papel=DOCENTE`;
     return this.http.get<any[]>(url);
+  }
+
+  listarAvaliacoesDoAluno(alunoId: number): Observable<Notas[]> {
+    const url = `${this.notasUrl}?aluno.id=${alunoId}`;
+    return this.http.get<Notas[]>(url);
   }
 
   criarUsuario(usuario: any): Observable<any> {

@@ -26,7 +26,7 @@ export class LoginComponent {
   verificarLogin() {
     this.authService.login(this.email, this.senha).subscribe(valido => {
       if (valido) {
-        this.router.navigate(['/']); // mudar para a home condizente com o papel
+        this.router.navigate(['/home']); // mudar para a home condizente com o papel
         console.log("logado")
       } else {
         this.erro = 'Email ou senha incorretos';

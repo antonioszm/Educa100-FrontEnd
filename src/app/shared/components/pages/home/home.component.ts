@@ -6,12 +6,21 @@ import { CardModule } from 'primeng/card';
 import { SplitterModule } from 'primeng/splitter';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
+import { Notas } from '../../../models/notas.model';
+import { InputTextModule } from 'primeng/inputtext';
+import { ToolbarComponent } from '../../toolbar/toolbar.component';
+import { ButtonModule } from 'primeng/button';
+
+
+
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [PanelModule,CardModule, SplitterModule, CommonModule, CardModule, FormsModule],
+  imports: [PanelModule,CardModule, SplitterModule, CommonModule, CardModule, FormsModule, InputTextModule, ToolbarComponent,ButtonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -23,16 +32,56 @@ export class HomeComponent {
     numeroDeDocentes!: number;
     numeroDeTurmas!: number;
     filtroAluno: string = '';
-    
-    constructor(private userService: UserService, private turmaService: TurmaService){}
+
+    listaDeAvaliacoes: Notas[] = [];
+    materiasCursando: string[] = [];
+    cursosExtras: string[] = ['Curso de PowerBi', 'Curso de Clean Code', 'Curso de Kanban'];
+
+    usuarioAluno: boolean = false;
+    usuarioDocente: boolean = false;
+    usuarioADM: boolean = false;
+    nomeUsuario: string | null = '';
+
+    constructor(private userService: UserService, private turmaService: TurmaService, private authService: AuthService, private router: Router){}
 
 
     ngOnInit(): void {
+      this.checarPerfilUsuario();
       this.verificarAlunos();
       this.verificarDocentes();
       this.verificarTurmas();
+      this.carregarDadosDoAluno();
+      this.obterNomeUsuario();
     }
 
+    obterNomeUsuario(): void {
+      const usuarioLogado = localStorage.getItem('usuariologado');
+      if (usuarioLogado) {
+          const user = JSON.parse(usuarioLogado);
+          this.nomeUsuario = user.nomeCompleto;
+      }
+  }
+
+    //funcoes de autorizacao
+    checarPerfilUsuario(): void {
+      if (this.authService.verificarSeForDocente()) {
+          this.usuarioDocente = true;
+          this.usuarioAluno = false;
+          this.usuarioADM = false;
+
+      } else if (this.authService.verificarSeForAluno()) {
+          this.usuarioDocente = false;
+          this.usuarioAluno = true;
+          this.usuarioADM = false;
+
+      } else if (this.authService.verificarSeForADM()) {
+        this.usuarioDocente = false;
+        this.usuarioAluno = false;
+        this.usuarioADM = true;
+    }
+  }
+
+    //funcoes Docente / ADM
     verificarAlunos(): number {
       this.userService.listarAlunos().subscribe(alunos => {
         this.listaDeAlunos = alunos;
@@ -56,6 +105,7 @@ export class HomeComponent {
       this.numeroDeTurmas = this.listaDeTurmas.length
       return this.numeroDeTurmas  
     }
+
     filtrarAlunos(): any[] {
       if (!this.filtroAluno) {
         return this.listaDeAlunos;
@@ -77,4 +127,25 @@ export class HomeComponent {
       return idade;
     }
 
+  //funcoes Aluno
+    carregarDadosDoAluno(): void {
+      const usuarioLogado = localStorage.getItem('usuariologado');
+      if (usuarioLogado) {
+          const user = JSON.parse(usuarioLogado);
+          this.materiasCursando = user.materias.split(',').map((mat: string) => mat.trim());
+          this.userService.listarAvaliacoesDoAluno(user.id).subscribe(avaliacoes => {
+              this.listaDeAvaliacoes = avaliacoes.slice(0, 3);
+          });
+      }
+  } 
+
+  redirecionarParaNota(avaliacao: Notas): void {
+    this.router.navigate(['/notas-aluno'], { queryParams: { id: avaliacao.id } });
+  }
+  redirecionarCadastro(): void {
+    //implementar
+  }
+  redirecionarParaLancarNota(): void {
+    //implementar
+  }
 }

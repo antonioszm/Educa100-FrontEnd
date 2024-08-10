@@ -1,19 +1,13 @@
 <p-sidebar [(visible)]="sidebarVisible">
     <h3>Outras Páginas</h3>
     <div class="links">
-        <a href="home" ><span class="pi pi-home"></span>Página inicial</a>
-        <br>
-        <a href="cadastro-docente"><span class="pi pi-pencil"></span>Cadastro de Docentes</a>
-        <br>
-        <a href="cadastro-aluno"><span class="pi pi-pencil"></span>Cadastro de Alunos</a>
-        <br>
-        <a href="cadastro-turma"><span class="pi pi-pencil"></span>Cadastro de Turma</a>
-        <br>
-        <a href="cadastro-avaliacao"><span class="pi pi-pencil"></span>Cadastro de Avaliação</a>
-        <br>
-        <a href="listagem-docentes"><span class="pi pi-pencil"></span>Listagem de Docentes</a>
-        <br>
-        <a href="notas"><span class="pi pi-address-book"></span> Listagem de Docentes</a>
+        <a href="home" ><span class="pi pi-home"></span>Página inicial<br></a>
+        <a *ngIf="usuarioADM" href="cadastro-docente"><span class="pi pi-pencil"></span>Cadastro de Docentes<br></a>
+        <a *ngIf="usuarioADM" href="cadastro-aluno"><span class="pi pi-pencil"></span>Cadastro de Alunos<br></a>
+        <a *ngIf="usuarioADM || usuarioDocente" href="cadastro-turma"><span class="pi pi-pencil"></span>Cadastro de Turma<br></a>
+        <a *ngIf="usuarioADM || usuarioDocente"  href="cadastro-avaliacao"><span class="pi pi-pencil"></span>Cadastro de Avaliação <br></a>
+        <a *ngIf="usuarioADM || usuarioDocente" href="listagem-docentes"><span class="pi pi-pencil"></span>Listagem de Docentes<br></a>
+        <a *ngIf="usuarioAluno" href="notas"><span class="pi pi-address-book"></span>Notas<br></a>
     </div>
     <div class="logout">
         <p-button (onClick)="deslogar()" icon="pi pi-sign-out" />

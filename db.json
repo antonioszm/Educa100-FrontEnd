@@ -228,7 +228,7 @@
       "papel": "DOCENTE"
     },
     {
-      "id": 9629,
+      "id": "9629",
       "nomeCompleto": "FFFFFFFFFFFFFFF",
       "genero": "F",
       "dataNascimento": "1974-07-22T03:00:00.000Z",
@@ -251,7 +251,7 @@
       "papel": "DOCENTE"
     },
     {
-      "id": 8707,
+      "id": "8707",
       "nomeCompleto": "AAAAAAAAAAAAA",
       "genero": "F",
       "dataNascimento": "2024-08-29T03:00:00.000Z",
@@ -274,7 +274,7 @@
       "papel": "DOCENTE"
     },
     {
-      "id": 2749,
+      "id": "2749",
       "nomeCompleto": "AAAAAAAAAAAAA",
       "genero": "F",
       "dataNascimento": "2024-08-29T03:00:00.000Z",
@@ -297,7 +297,7 @@
       "papel": "DOCENTE"
     },
     {
-      "id": 5144,
+      "id": "5144",
       "nomeCompleto": "AAAAAAAAAAAAA",
       "genero": "F",
       "dataNascimento": "2024-08-29T03:00:00.000Z",
@@ -320,7 +320,7 @@
       "papel": "DOCENTE"
     },
     {
-      "id": 892,
+      "id": "892",
       "nomeCompleto": "AAAAAAAAAAAAA",
       "genero": "F",
       "dataNascimento": "2024-08-29T03:00:00.000Z",
@@ -343,7 +343,7 @@
       "papel": "DOCENTE"
     },
     {
-      "id": 4028,
+      "id": "4028",
       "nomeCompleto": "AAAAAAAAAAAAA2",
       "genero": "M",
       "dataNascimento": "2024-08-29T03:00:00.000Z",
@@ -366,7 +366,7 @@
       "papel": "DOCENTE"
     },
     {
-      "id": 6006,
+      "id": "6006",
       "nomeCompleto": "hhhhhhh11",
       "genero": "F",
       "dataNascimento": "2024-08-27T03:00:00.000Z",
@@ -387,9 +387,123 @@
       "pontoDeReferencia": "Colegio Catarinense",
       "materias": "SQL",
       "papel": "DOCENTE"
+    },
+    {
+      "id": 8176,
+      "nomeCompleto": "aluno joseca",
+      "genero": "F",
+      "dataNascimento": "2024-08-11T03:00:00.000Z",
+      "cpf": "104.123.423-21",
+      "rg": "12.345.678-9-SC",
+      "telefone": "(48) 9 1234-5678",
+      "email": "as2@o1k3.com",
+      "senha": "12345678",
+      "naturalidade": "Curitiba",
+      "cep": "88015250",
+      "cidade": "Florianópolis",
+      "estado": "SC",
+      "logradouro": "Rua Doutor Armínio Tavares",
+      "numero": "111",
+      "complemento": "ap, 101",
+      "bairro": "Centro",
+      "pontoDeReferencia": "Colegio Catarinense",
+      "turmas": [
+        {
+          "id": "102",
+          "nome": "Turma B - História Mundial",
+          "dataInicio": "2024-09-02T14:00:00.000Z",
+          "dataTermino": "2024-12-20T17:00:00.000Z",
+          "horario": "Terça e Quinta, 14:00 - 17:00",
+          "professor": {
+            "id": 11,
+            "nomeCompleto": "Professor B",
+            "email": "professorb@escola.com",
+            "papel": "DOCENTE",
+            "genero": "Masculino",
+            "dataDeNascimento": "1970-08-20",
+            "cpf": "987.654.321-00",
+            "rg": "98.765.432-1",
+            "telefone": "(21) 91234-5678",
+            "naturalidade": "Rio de Janeiro, RJ",
+            "endereco": {
+              "cep": "20000-000",
+              "cidade": "Rio de Janeiro",
+              "estado": "RJ",
+              "logradouro": "Rua B",
+              "numero": "200",
+              "complemento": "Casa 2",
+              "bairro": "Botafogo",
+              "pontoDeReferencia": "Perto do shopping"
+            },
+            "materias": "História"
+          }
+        }
+      ],
+      "papel": "ALUNO"
     }
   ],
-  "turmas": [],
+  "turmas": [
+    {
+      "id": "101",
+      "nome": "Turma A - Matemática Básica",
+      "dataInicio": "2024-09-01T08:00:00.000Z",
+      "dataTermino": "2024-12-15T11:00:00.000Z",
+      "horario": "Segunda e Quarta, 08:00 - 11:00",
+      "professor": {
+        "id": 10,
+        "nomeCompleto": "Professor A",
+        "email": "professora@escola.com",
+        "papel": "DOCENTE",
+        "genero": "Feminino",
+        "dataDeNascimento": "1975-05-15",
+        "cpf": "123.456.789-00",
+        "rg": "12.345.678-9",
+        "telefone": "(11) 98765-4321",
+        "naturalidade": "São Paulo, SP",
+        "endereco": {
+          "cep": "01001-000",
+          "cidade": "São Paulo",
+          "estado": "SP",
+          "logradouro": "Rua A",
+          "numero": "100",
+          "complemento": "Apto 10",
+          "bairro": "Centro",
+          "pontoDeReferencia": "Próximo à praça"
+        },
+        "materias": "Matemática"
+      }
+    },
+    {
+      "id": "102",
+      "nome": "Turma B - História Mundial",
+      "dataInicio": "2024-09-02T14:00:00.000Z",
+      "dataTermino": "2024-12-20T17:00:00.000Z",
+      "horario": "Terça e Quinta, 14:00 - 17:00",
+      "professor": {
+        "id": 11,
+        "nomeCompleto": "Professor B",
+        "email": "professorb@escola.com",
+        "papel": "DOCENTE",
+        "genero": "Masculino",
+        "dataDeNascimento": "1970-08-20",
+        "cpf": "987.654.321-00",
+        "rg": "98.765.432-1",
+        "telefone": "(21) 91234-5678",
+        "naturalidade": "Rio de Janeiro, RJ",
+        "endereco": {
+          "cep": "20000-000",
+          "cidade": "Rio de Janeiro",
+          "estado": "RJ",
+          "logradouro": "Rua B",
+          "numero": "200",
+          "complemento": "Casa 2",
+          "bairro": "Botafogo",
+          "pontoDeReferencia": "Perto do shopping"
+        },
+        "materias": "História"
+      }
+    }
+  ],
   "notas": [
     {
       "id": "1",

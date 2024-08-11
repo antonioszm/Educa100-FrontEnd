@@ -1,0 +1,160 @@
+<app-toolbar></app-toolbar>
+<div class="container">
+  <h2>Cadastro de Aluno</h2>
+  <form [formGroup]="alunoForm" (ngSubmit)="onSubmit()">
+    
+    <!-- Informações Pessoais -->
+    <div class="form-section">
+      <h3>Informações Pessoais</h3>
+      <div class="form-grid">
+        <div class="field">
+          <label for="nomeCompleto">Nome Completo</label>
+          <input id="nomeCompleto" type="text" pInputText formControlName="nomeCompleto" />
+          <div *ngIf="alunoForm.get('nomeCompleto')?.invalid && alunoForm.get('nomeCompleto')?.touched">
+            <small class="p-error">Nome completo deve ter entre 8 e 64 caracteres.</small>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="rg">RG com órgão expedidor</label>
+          <input id="rg" type="text" pInputText formControlName="rg" maxlength="20" />
+          <div *ngIf="alunoForm.get('rg')?.invalid && alunoForm.get('rg')?.touched">
+            <small class="p-error">RG é obrigatório e deve ter órgão expedidor antecedido por um hífen.</small>
+          </div>
+        </div>
+        <div class="field">
+          <label for="cpf">CPF</label>
+          <input id="cpf" type="text" pInputText formControlName="cpf" mask="999.999.999-99" />
+          <div *ngIf="alunoForm.get('cpf')?.invalid && alunoForm.get('cpf')?.touched">
+            <small class="p-error">CPF é obrigatório e deve estar no formato esperado: XXX.XXX.XXX-XX.</small>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="genero">Gênero</label>
+          <p-dropdown [options]="generos" formControlName="genero" placeholder="Selecione um gênero"></p-dropdown>
+          <div *ngIf="alunoForm.get('genero')?.invalid && alunoForm.get('genero')?.touched">
+            <small class="p-error">Gênero é obrigatório.</small>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="senha">Senha</label>
+          <input id="senha" type="password" pInputText formControlName="senha" />
+          <div *ngIf="alunoForm.get('senha')?.invalid && alunoForm.get('senha')?.touched">
+            <small class="p-error">Senha é obrigatória e deve ter no mínimo 8 caracteres.</small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fieldPequeno">
+      <label for="naturalidade">Naturalidade</label>
+      <input id="naturalidade" type="text" pInputText formControlName="naturalidade" />
+      <div *ngIf="alunoForm.get('naturalidade')?.invalid && alunoForm.get('naturalidade')?.touched">
+        <small class="p-error">Naturalidade deve ter entre 8 e 64 caracteres.</small>
+      </div>
+    </div>
+    <div class="field">
+      <label for="dataNascimento">Data de Nascimento</label>
+      <p-calendar id="dataNascimento" formControlName="dataNascimento" dateFormat="dd/mm/yy" showIcon="true"></p-calendar>
+      <div *ngIf="alunoForm.get('dataNascimento')?.invalid && alunoForm.get('dataNascimento')?.touched">
+        <small class="p-error">Data de nascimento é obrigatória.</small>
+      </div>
+    </div>
+
+
+    <!-- Contato -->
+    <div class="form-section">
+      <h3>Contato</h3>
+      <div class="contact-grid">
+        <div class="fieldPequeno">
+          <label for="email">E-mail</label>
+          <input id="email" type="text" pInputText formControlName="email" />
+          <div *ngIf="alunoForm.get('email')?.invalid && alunoForm.get('email')?.touched">
+            <small class="p-error">E-mail é obrigatório e deve estar no formato correto.</small>
+          </div>
+        </div>
+    
+        <div class="fieldPequeno">
+          <label for="telefone">Telefone</label>
+          <input id="telefone" type="text" pInputText formControlName="telefone" mask="(99) 9 9999-9999" />
+          <div *ngIf="alunoForm.get('telefone')?.invalid && alunoForm.get('telefone')?.touched">
+            <small class="p-error">Telefone é obrigatório e deve estar no formato esperado: (XX) 9 XXXX-XXXX.</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Endereço -->
+    <div class="form-section">
+      <h3>Endereço</h3>
+      <div class="form-grid">
+        <div class="field">
+          <label for="cep">CEP</label>
+          <input id="cep" type="text" pInputText formControlName="cep" (blur)="buscarEndereco()" mask="99999-999" />
+          <div *ngIf="alunoForm.get('cep')?.invalid && alunoForm.get('cep')?.touched">
+            <small class="p-error">CEP é obrigatório e deve estar no formato correto.</small>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="logradouro">Logradouro</label>
+          <input id="logradouro" type="text" pInputText formControlName="logradouro" readonly />
+        </div>
+
+        <div class="field">
+          <label for="numero">Número</label>
+          <input id="numero" type="text" pInputText formControlName="numero" />
+          <div *ngIf="alunoForm.get('numero')?.invalid && alunoForm.get('numero')?.touched">
+            <small class="p-error">Número é obrigatório.</small>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="complemento">Complemento</label>
+          <input id="complemento" type="text" pInputText formControlName="complemento" />
+        </div>
+
+        <div class="field">
+          <label for="bairro">Bairro</label>
+          <input id="bairro" type="text" pInputText formControlName="bairro" readonly />
+        </div>
+
+        <div class="field">
+          <label for="cidade">Cidade</label>
+          <input id="cidade" type="text" pInputText formControlName="cidade" readonly />
+        </div>
+
+        <div class="field">
+          <label for="estado">Estado</label>
+          <input id="estado" type="text" pInputText formControlName="estado" readonly />
+        </div>
+
+        <div class="field">
+          <label for="pontoDeReferencia">Ponto de Referência</label>
+          <input id="pontoDeReferencia" type="text" pInputText formControlName="pontoDeReferencia" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Turmas -->
+    <div class="form-section">
+      <h3>Turmas</h3>
+      <div class="form-grid">
+        <div class="field">
+          <label for="turmas">Turmas</label>
+          <p-multiSelect [options]="turmasDisponiveis" formControlName="turmas" placeholder="Selecione as turmas" optionLabel="nome"></p-multiSelect>
+          <div *ngIf="alunoForm.get('turmas')?.invalid && alunoForm.get('turmas')?.touched">
+            <small class="p-error">Você deve selecionar pelo menos uma turma.</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button pButton type="submit" label="Salvar" (onClick)="showSuccess()" [disabled]="!alunoForm.valid"></button>
+      <button pButton type="button" label="Editar" disabled></button>
+      <button pButton type="button" label="Deletar" disabled></button>
+    </div>
+  </form>
+</div>

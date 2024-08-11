@@ -5,6 +5,8 @@ import { CadastroDocenteComponent } from './shared/components/pages/cadastro-doc
 import { logadoGuard } from './guard/logado.guard';
 import { admGuard } from './guard/adm.guard';
 import { CadastroAlunoComponent } from './shared/components/pages/cadastro-aluno/cadastro-aluno.component';
+import { CadastroTurmaComponent } from './shared/components/pages/cadastro-turma/cadastro-turma.component';
+import { admOuDocenteGuard } from './guard/adm-ou-docente.guard';
 
 export const routes: Routes = [
     {
@@ -30,6 +32,11 @@ export const routes: Routes = [
         path: "cadastro-aluno",
         component: CadastroAlunoComponent,
         canActivate: [logadoGuard, admGuard]
+    },
+    {
+        path: "cadastro-turma",
+        component: CadastroTurmaComponent,
+        canActivate: [logadoGuard, admOuDocenteGuard]
     },
     {
         path: '**',

@@ -62,4 +62,9 @@ export class AuthService {
       }
       return false;    
     }
+
+    getUsuarioLogado(): User | null {
+      const usuarioLogado = localStorage.getItem('usuariologado');
+      return usuarioLogado ? JSON.parse(usuarioLogado) as User : null;
+    }
 }

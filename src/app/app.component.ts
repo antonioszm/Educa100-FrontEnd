@@ -7,11 +7,13 @@ import { MenuLateralComponent } from './shared/components/menu-lateral/menu-late
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { CommonModule } from '@angular/common';
 import { ToolbarComponent } from './shared/components/toolbar/toolbar.component';
+import { ToastModule } from 'primeng/toast';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ButtonModule, CommonModule, HttpClientModule, SidebarModule,ToolbarComponent, MenuLateralComponent, AppComponent],
+  imports: [RouterOutlet, ButtonModule, CommonModule, HttpClientModule, SidebarModule,ToolbarComponent, MenuLateralComponent, AppComponent, ToastModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

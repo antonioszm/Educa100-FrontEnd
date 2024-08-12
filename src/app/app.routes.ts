@@ -8,6 +8,7 @@ import { CadastroAlunoComponent } from './shared/components/pages/cadastro-aluno
 import { CadastroTurmaComponent } from './shared/components/pages/cadastro-turma/cadastro-turma.component';
 import { admOuDocenteGuard } from './guard/adm-ou-docente.guard';
 import { CadastroNotaComponent } from './shared/components/pages/cadastro-nota/cadastro-nota.component';
+import { ListagemDocentesComponent } from './shared/components/pages/listagem-docentes/listagem-docentes.component';
 
 export const routes: Routes = [
     {
@@ -30,6 +31,11 @@ export const routes: Routes = [
         canActivate: [logadoGuard, admGuard]
     },
     {
+        path: "cadastro-docente/:id",
+        component: CadastroDocenteComponent,
+        canActivate: [logadoGuard, admGuard]
+    },
+    {
         path: "cadastro-aluno",
         component: CadastroAlunoComponent,
         canActivate: [logadoGuard, admGuard]
@@ -43,6 +49,11 @@ export const routes: Routes = [
         path: "cadastro-nota",
         component: CadastroNotaComponent,
         canActivate: [logadoGuard, admOuDocenteGuard]
+    },
+    {
+        path: "listagem-docentes",
+        component: ListagemDocentesComponent,
+        canActivate: [logadoGuard, admGuard]
     },
     {
         path: '**',

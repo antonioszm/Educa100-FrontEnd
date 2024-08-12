@@ -13,6 +13,8 @@ import { ToolbarComponent } from '../../toolbar/toolbar.component';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { CommonModule } from '@angular/common';
 import { MessagesModule } from 'primeng/messages';
+import type { Turma } from '../../../models/turma.model';
+import { TurmaService } from '../../../services/turma.service';
 
 
 @Component({
@@ -33,8 +35,9 @@ export class CadastroNotaComponent implements OnInit  {
   ];
   isAdm: boolean = false;
   isDocente: boolean = false;
+  turmasDisponiveis: Turma[] = [];
 
-  constructor(private fb: FormBuilder,private messageService: MessageService,private router: Router,private userService: UserService,private authService: AuthService,private notaService: NotaService) {}
+  constructor(private fb: FormBuilder,private messageService: MessageService,private router: Router,private userService: UserService,private authService: AuthService,private notaService: NotaService, private turmaService: TurmaService) {}
 
   ngOnInit(): void {
     const usuarioLogado = this.authService.getUsuarioLogado();
@@ -71,6 +74,18 @@ export class CadastroNotaComponent implements OnInit  {
         this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao carregar alunos.' });
       }
     });
+
+    this.turmaService.listarTurmas().subscribe({
+      next: (turmas) => {
+        this.turmasDisponiveis = turmas;
+      },
+      error: () => {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao carregar turmas.' });
+      }
+    });
+    this.notaForm.get('turma')?.valueChanges.subscribe(() => {
+      this.verificarTurmaValida();
+    });
   }
 
   inicializarFormulario(usuarioLogado: User): void {
@@ -80,6 +95,7 @@ export class CadastroNotaComponent implements OnInit  {
       nomeDaAvaliacao: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(64)]],
       dataAvaliacao: [new Date(), Validators.required],
       aluno: ['', Validators.required],
+      turma: ['', Validators.required],
       nota: ['', [Validators.required, Validators.min(0), Validators.max(10)]],
     });
 
@@ -114,5 +130,24 @@ export class CadastroNotaComponent implements OnInit  {
 
   gerarId(): number {
     return Math.floor(Math.random() * 10000);
+  }
+
+  verificarTurmaValida(): void {
+  const alunoSelecionado = this.notaForm.get('aluno')?.value;
+  const professorSelecionado = this.notaForm.get('professor')?.value;
+  const turmaSelecionada = this.notaForm.get('turma')?.value;
+
+  if (!alunoSelecionado || !professorSelecionado || !turmaSelecionada) {
+    this.notaForm.get('turma')?.setErrors({ invalidTurma: true });
+    return;
+  }
+  const alunoNaTurma = alunoSelecionado.turmas.some((turma: Turma) => turma.id === turmaSelecionada.id);
+const professorNaTurma = professorSelecionado.turmas.some((turma: Turma) => turma.id === turmaSelecionada.id);
+
+  if (alunoNaTurma && professorNaTurma) {
+    this.notaForm.get('turma')?.setErrors(null); 
+  } else {
+    this.notaForm.get('turma')?.setErrors({ invalidTurma: true });
+  }
   }
 }

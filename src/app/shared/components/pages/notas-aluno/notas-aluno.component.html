@@ -1,0 +1,27 @@
+<app-toolbar></app-toolbar>
+<div class="container">
+  <h2>Histórico de Notas</h2>
+
+  <p-table [value]="notas">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Turma</th>
+        <th>Docente</th>
+        <th>Matéria</th>
+        <th>Nome da Avaliação</th>
+        <th>Data da Avaliação</th>
+        <th>Nota</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-nota>
+      <tr>
+        <td>{{ nota.turma?.nome || 'N/A'}}</td>
+        <td>{{ nota.professor?.nomeCompleto || 'N/A' }}</td>
+        <td>{{ nota.nomeDaMateria }}</td>
+        <td>{{ nota.nomeDaAvaliacao }}</td>
+        <td>{{ nota.dataAvaliacao ? (nota.dataAvaliacao | date: 'dd/MM/yyyy') : 'N/A' }}</td>
+        <td>{{ nota.nota }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

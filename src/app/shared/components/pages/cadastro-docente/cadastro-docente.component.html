@@ -157,11 +157,11 @@
         </div>
       </div>
     </div>
-
+    <p-confirmDialog header="Confirmação" icon="pi pi-exclamation-triangle"></p-confirmDialog>
     <div class="buttons">
       <button pButton type="submit" label="Salvar" (onClick)="showSuccess()" [disabled]="!docenteForm.valid"></button>
-      <button pButton type="button" label="Editar" disabled></button>
-      <button pButton type="button" label="Deletar" disabled></button>
+      <button pButton type="button" label="Editar"  (click)="atualizarDocente()"  disabled [disabled]="!isEditavel && !docenteForm.valid"></button>
+      <button pButton type="button" label="Deletar" (click)="confirmDeletarDocente()" disabled [disabled]="!isDeletavel && !docenteForm.valid"></button>
     </div>
   </form>
 </div>

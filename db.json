@@ -102,6 +102,7 @@
     },
     {
       "id": "2",
+      "nomeCompleto": "professor",
       "email": "professor@outlook.com",
       "senha": "123",
       "papel": "DOCENTE"
@@ -205,30 +206,7 @@
       "papel": "DOCENTE"
     },
     {
-      "id": "2874",
-      "nomeCompleto": "EEEEEEEE",
-      "genero": "M",
-      "dataNascimento": "1995-05-31T03:00:00.000Z",
-      "cpf": "104.123.423-21",
-      "rg": "12.345.678-9-SC",
-      "estadoCivil": "Solteiro",
-      "telefone": "(48) 9 1234-5678",
-      "email": "as2@oak.com",
-      "senha": "12345678",
-      "naturalidade": "Curitiba",
-      "cep": "88015250",
-      "cidade": "Florianópolis",
-      "estado": "SC",
-      "logradouro": "Rua Doutor Armínio Tavares",
-      "numero": "111",
-      "complemento": "ap, 101",
-      "bairro": "Centro",
-      "pontoDeReferencia": "Colegio Catarinense",
-      "materias": "Angular",
-      "papel": "DOCENTE"
-    },
-    {
-      "id": 9629,
+      "id": "9629",
       "nomeCompleto": "FFFFFFFFFFFFFFF",
       "genero": "F",
       "dataNascimento": "1974-07-22T03:00:00.000Z",
@@ -251,7 +229,7 @@
       "papel": "DOCENTE"
     },
     {
-      "id": 8707,
+      "id": "8707",
       "nomeCompleto": "AAAAAAAAAAAAA",
       "genero": "F",
       "dataNascimento": "2024-08-29T03:00:00.000Z",
@@ -274,7 +252,7 @@
       "papel": "DOCENTE"
     },
     {
-      "id": 2749,
+      "id": "2749",
       "nomeCompleto": "AAAAAAAAAAAAA",
       "genero": "F",
       "dataNascimento": "2024-08-29T03:00:00.000Z",
@@ -297,7 +275,7 @@
       "papel": "DOCENTE"
     },
     {
-      "id": 5144,
+      "id": "5144",
       "nomeCompleto": "AAAAAAAAAAAAA",
       "genero": "F",
       "dataNascimento": "2024-08-29T03:00:00.000Z",
@@ -320,7 +298,7 @@
       "papel": "DOCENTE"
     },
     {
-      "id": 892,
+      "id": "892",
       "nomeCompleto": "AAAAAAAAAAAAA",
       "genero": "F",
       "dataNascimento": "2024-08-29T03:00:00.000Z",
@@ -343,7 +321,7 @@
       "papel": "DOCENTE"
     },
     {
-      "id": 4028,
+      "id": "4028",
       "nomeCompleto": "AAAAAAAAAAAAA2",
       "genero": "M",
       "dataNascimento": "2024-08-29T03:00:00.000Z",
@@ -366,7 +344,7 @@
       "papel": "DOCENTE"
     },
     {
-      "id": 6006,
+      "id": "6006",
       "nomeCompleto": "hhhhhhh11",
       "genero": "F",
       "dataNascimento": "2024-08-27T03:00:00.000Z",
@@ -387,39 +365,103 @@
       "pontoDeReferencia": "Colegio Catarinense",
       "materias": "SQL",
       "papel": "DOCENTE"
+    },
+    {
+      "id": "9062",
+      "nomeCompleto": "hh1hhhhh11",
+      "genero": "F",
+      "dataNascimento": "2024-08-27T03:00:00.000Z",
+      "cpf": "104.123.423-21",
+      "rg": "12.345.678-9-SC",
+      "estadoCivil": "Solteiro",
+      "telefone": "(48) 9 1234-5678",
+      "email": "asd@2oak.com",
+      "senha": "12345678",
+      "naturalidade": "Curitiba",
+      "cep": "88015250",
+      "cidade": "Florianópolis",
+      "estado": "SC",
+      "logradouro": "Rua Doutor Armínio Tavares",
+      "numero": "111",
+      "complemento": "ap, 101",
+      "bairro": "Centro",
+      "pontoDeReferencia": "Colegio Catarinense",
+      "materias": "SQL",
+      "papel": "DOCENTE"
+    },
+    {
+      "id": "8170",
+      "nomeCompleto": "Ehenderson IV",
+      "genero": "M",
+      "dataNascimento": "1995-05-31T03:00:00.000Z",
+      "cpf": "104.123.423-21",
+      "rg": "12.345.678-9-SC",
+      "estadoCivil": "Solteiro",
+      "telefone": "(48) 9 1234-5678",
+      "email": "as2@oak.com",
+      "senha": "12345678",
+      "naturalidade": "Curitiba",
+      "cep": "88015250",
+      "cidade": "Florianópolis",
+      "estado": "SC",
+      "logradouro": "Rua Doutor Armínio Tavares",
+      "numero": "111",
+      "complemento": "ap, 101",
+      "bairro": "Centro",
+      "pontoDeReferencia": "Colegio Catarinense",
+      "materias": "Angular",
+      "papel": "DOCENTE"
+    },
+    {
+      "id": "5410",
+      "nomeCompleto": "Ehenderson IV",
+      "genero": "M",
+      "dataNascimento": "1995-05-31T03:00:00.000Z",
+      "cpf": "104.123.423-21",
+      "rg": "12.345.678-9-SC",
+      "estadoCivil": "Solteiro",
+      "telefone": "(48) 9 1234-5678",
+      "email": "as2@oak.com",
+      "senha": "12345678",
+      "naturalidade": "Curitiba",
+      "cep": "88015250",
+      "cidade": "Florianópolis",
+      "estado": "SC",
+      "logradouro": "Rua Doutor Armínio Tavares",
+      "numero": "111",
+      "complemento": "ap, 101",
+      "bairro": "Centro",
+      "pontoDeReferencia": "Colegio Catarinense",
+      "materias": "Angular",
+      "papel": "DOCENTE"
+    },
+    {
+      "id": "6827",
+      "nomeCompleto": "Claudio Souza Nunes Pereira Filho",
+      "genero": "F",
+      "dataNascimento": "1974-07-22T03:00:00.000Z",
+      "cpf": "104.123.423-21",
+      "rg": "12.345.678-9-SC",
+      "estadoCivil": "Solteiro",
+      "telefone": "(48) 9 1234-5678",
+      "email": "as3@oak.com",
+      "senha": "12345678",
+      "naturalidade": "Curitiba",
+      "cep": "88015250",
+      "cidade": "Florianópolis",
+      "estado": "SC",
+      "logradouro": "Rua Doutor Armínio Tavares",
+      "numero": "111",
+      "complemento": "ap, 101",
+      "bairro": "Centro",
+      "pontoDeReferencia": "Colegio Catarinense",
+      "materias": "Angular, SQL",
+      "papel": "DOCENTE"
     }
   ],
   "turmas": [
     {
-      "id": 9747,
-      "nome": "121aaaaaaaaaaaa",
-      "dataInicio": "2024-08-11T16:09:45.782Z",
-      "dataTermino": "2024-08-23T03:00:00.000Z",
-      "horario": "23:01"
-    },
-    {
-      "id": 20,
-      "nome": "111111331",
-      "dataInicio": "2024-08-11T19:59:00.104Z",
-      "dataTermino": "2024-08-05T03:00:00.000Z",
-      "horario": "11:21"
-    },
-    {
-      "id": 4841,
-      "nome": "121a321aaaaaaaaaaa",
-      "dataInicio": "2024-08-11T20:17:49.401Z",
-      "dataTermino": "2024-08-16T03:00:00.000Z",
-      "horario": "2024-08-11T20:18:52.249Z"
-    },
-    {
-      "id": 971,
-      "nome": "41323131231",
-      "dataInicio": "2024-08-11T20:21:10.167Z",
-      "dataTermino": "2024-08-07T03:00:00.000Z",
-      "horario": "17:21"
-    },
-    {
-      "id": 6180,
+      "id": "6180",
       "nome": "31241221111111",
       "dataInicio": "2024-08-11T20:28:34.100Z",
       "dataTermino": "2024-08-13T03:00:00.000Z",
@@ -449,42 +491,7 @@
       }
     },
     {
-      "id": 2571,
-      "nome": "1222222222222222224",
-      "dataInicio": "2024-08-11T20:31:46.731Z",
-      "dataTermino": "2024-08-14T03:00:00.000Z",
-      "horario": "17:31"
-    },
-    {
-      "id": 4979,
-      "nome": "1113242342342",
-      "dataInicio": "2024-08-11T20:35:31.693Z",
-      "dataTermino": "2024-08-12T03:00:00.000Z",
-      "horario": "17:35"
-    },
-    {
-      "id": 1787,
-      "nome": "123412412312312312",
-      "dataInicio": "2024-08-11T20:36:22.130Z",
-      "dataTermino": "2024-08-05T03:00:00.000Z",
-      "horario": "17:36"
-    },
-    {
-      "id": 1099,
-      "nome": "asdaelfui;mwieusfna",
-      "dataInicio": "2024-08-11T20:39:56.014Z",
-      "dataTermino": "2024-08-03T03:00:00.000Z",
-      "horario": "17:39"
-    },
-    {
-      "id": 7556,
-      "nome": "123dawdawd",
-      "dataInicio": "2024-08-11T20:56:09.807Z",
-      "dataTermino": "2103-05-16T03:00:00.000Z",
-      "horario": "17:56"
-    },
-    {
-      "id": 86,
+      "id": "86",
       "nome": "fdsfsfsfsfsfs",
       "dataInicio": "2024-08-11T21:40:24.138Z",
       "dataTermino": "2024-08-06T03:00:00.000Z",
@@ -514,7 +521,7 @@
       }
     },
     {
-      "id": 1448,
+      "id": "1448",
       "nome": "h2w3e123123123",
       "dataInicio": "2024-08-11T21:43:28.413Z",
       "dataTermino": "2024-08-16T03:00:00.000Z",
@@ -711,7 +718,7 @@
       "nota": 9
     },
     {
-      "id": 8770,
+      "id": "8770",
       "professor": {
         "id": "8219",
         "nomeCompleto": "BBBBBBBBBB",
@@ -764,93 +771,6 @@
         "materias": "História, Geografia"
       },
       "notaAvaliacao": 7.3
-    },
-    {
-      "id": 3607,
-      "nomeMateria": "Angular",
-      "nomeAvaliacao": "ad1",
-      "dataAvaliacao": "2024-08-11T22:17:21.577Z",
-      "aluno": {
-        "id": "1",
-        "nomeCompleto": "Antonio Silva",
-        "email": "antonioszm@outlook.com",
-        "senha": "123",
-        "papel": "ALUNO",
-        "genero": "Masculino",
-        "dataDeNascimento": "1998-04-22",
-        "cpf": "123.456.789-00",
-        "rg": "12.345.678-9",
-        "telefone": "(11) 98765-4321",
-        "naturalidade": "São Paulo, SP",
-        "endereco": {
-          "cep": "01001-000",
-          "cidade": "São Paulo",
-          "estado": "SP",
-          "logradouro": "Rua A",
-          "numero": "100",
-          "complemento": "Apto 10",
-          "bairro": "Centro",
-          "pontoDeReferencia": "Próximo à praça"
-        },
-        "turmas": [],
-        "materias": "Matemática, Física"
-      },
-      "notaAvaliacao": 10
-    },
-    {
-      "id": 7234,
-      "professor": {
-        "id": 6006,
-        "nomeCompleto": "hhhhhhh11",
-        "genero": "F",
-        "dataNascimento": "2024-08-27T03:00:00.000Z",
-        "cpf": "104.123.423-21",
-        "rg": "12.345.678-9-SC",
-        "estadoCivil": "Solteiro",
-        "telefone": "(48) 9 1234-5678",
-        "email": "asd@2oak.com",
-        "senha": "12345678",
-        "naturalidade": "Curitiba",
-        "cep": "88015250",
-        "cidade": "Florianópolis",
-        "estado": "SC",
-        "logradouro": "Rua Doutor Armínio Tavares",
-        "numero": "111",
-        "complemento": "ap, 101",
-        "bairro": "Centro",
-        "pontoDeReferencia": "Colegio Catarinense",
-        "materias": "SQL",
-        "papel": "DOCENTE"
-      },
-      "nomeDaMateria": "SQL",
-      "nomeDaAvaliacao": "primeiraDoAno",
-      "dataAvaliacao": "2024-08-01T03:00:00.000Z",
-      "aluno": {
-        "id": "4",
-        "nomeCompleto": "Pedro Henrique",
-        "email": "pedro@outlook.com",
-        "senha": "123",
-        "papel": "ALUNO",
-        "genero": "Masculino",
-        "dataDeNascimento": "2000-09-15",
-        "cpf": "987.654.321-00",
-        "rg": "98.765.432-1",
-        "telefone": "(21) 91234-5678",
-        "naturalidade": "Rio de Janeiro, RJ",
-        "endereco": {
-          "cep": "20000-000",
-          "cidade": "Rio de Janeiro",
-          "estado": "RJ",
-          "logradouro": "Rua B",
-          "numero": "200",
-          "complemento": "Casa 2",
-          "bairro": "Botafogo",
-          "pontoDeReferencia": "Perto do shopping"
-        },
-        "turmas": [],
-        "materias": "Química, Biologia"
-      },
-      "nota": 1
     }
   ]
 }

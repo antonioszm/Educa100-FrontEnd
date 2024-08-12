@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { CommonModule } from '@angular/common';
@@ -11,11 +11,14 @@ import { ToastModule } from 'primeng/toast';
 import { MessagesModule } from 'primeng/messages';
 import { UserService } from '../../../services/user.service';
 import { ToolbarComponent } from "../../toolbar/toolbar.component";
+import { ActivatedRoute } from '@angular/router'; 
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+
 
 @Component({
   selector: 'app-cadastro-docente',
   standalone: true,
-  imports: [MultiSelectModule, CommonModule, DropdownModule, CalendarModule, ReactiveFormsModule, ToastModule, MessagesModule, ToolbarComponent],
+  imports: [MultiSelectModule, CommonModule, DropdownModule, CalendarModule, ReactiveFormsModule, ToastModule, MessagesModule, ToolbarComponent, ConfirmDialogModule],
   templateUrl: './cadastro-docente.component.html',
   styleUrl: './cadastro-docente.component.scss'
 })
@@ -28,8 +31,12 @@ export class CadastroDocenteComponent implements OnInit{
     { label: 'Angular', value: 'Angular' },
     { label: 'SQL', value: 'SQL' }
   ];
+  docenteId!: number;
+  isDeletavel!: boolean
+  isEditavel!: boolean
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private messageService: MessageService, private router: Router, private userService: UserService) {}
+
+  constructor(private fb: FormBuilder, private http: HttpClient, private messageService: MessageService, private router: Router, private userService: UserService, private route: ActivatedRoute, private confirmationService: ConfirmationService) {}
 
   ngOnInit(): void {
     this.http.get('http://localhost:3000/users').subscribe({
@@ -58,6 +65,48 @@ export class CadastroDocenteComponent implements OnInit{
       pontoDeReferencia: [''],
       materias: [[], Validators.required]
     });
+
+    this.route.queryParams.subscribe(params => {
+      const id = params['id'];
+      if (id) {
+        this.docenteId = +id;
+        this.carregarDocente(this.docenteId);
+      }
+    });
+  }
+  
+  carregarDocente(id: number): void {
+    this.userService.listarUsuarioPorId(id).subscribe(docente => {
+      const dataNascimento = docente.dataNascimento ? new Date(docente.dataNascimento) : null;
+
+      this.docenteForm.patchValue({
+        nomeCompleto: docente.nomeCompleto,
+        genero: docente.genero,
+        dataNascimento: dataNascimento,
+        cpf: docente.cpf,
+        rg: docente.rg,
+        estadoCivil: docente.estadoCivil,
+        telefone: docente.telefone,
+        email: docente.email,
+        senha: docente.senha,
+        naturalidade: docente.naturalidade,
+        cep: docente.cep,
+        cidade: docente.cidade,
+        estado: docente.estado,
+        logradouro: docente.logradouro,
+        numero: docente.numero,
+        complemento: docente.complemento,
+        bairro: docente.bairro,
+        pontoDeReferencia: docente.pontoDeReferencia,
+        materias: docente.materias.split(', ')
+      });
+      this.enableButtons();
+    });
+  }
+
+  enableButtons(): void {
+    this.isDeletavel = true
+    this.isEditavel = true
   }
 
   buscarEndereco(): void {
@@ -130,6 +179,73 @@ export class CadastroDocenteComponent implements OnInit{
       summary: 'Erro', 
       detail: 'Formulário inválido',
       life: 3000 
+    });
+  }
+
+  atualizarDocente(): void {
+    console.log('Formulário enviado para update:', this.docenteForm.value);
+  
+    if (this.docenteForm.valid) {
+      const docente = {
+        ...this.docenteForm.value,
+        papel: 'DOCENTE',
+        materias: this.docenteForm.value.materias.join(', '),
+        id : this.docenteId,
+      };
+      
+      console.log('Dados enviados para API {update}:', docente);
+  
+      this.userService.atualizarUsuario(docente).subscribe({
+        next: () => {
+          console.log('Usuário atualizado com sucesso');
+          this.showSuccess();
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Docente atualizado com sucesso' });
+          setTimeout(() => {
+            this.router.navigate(['/home']);
+          }, 3000); 
+        },
+        error: (error) => {
+          console.error('Erro ao atualizar docente:', error);
+          this.showError();
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao atualizar docente' });
+        }
+      });
+    } else {
+      console.error('Formulário inválido');
+      this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Formulário inválido' });
+    }
+  }
+
+  deletarDocente(): void {
+    this.userService.verificarDependencias(this.docenteId, 'DOCENTE').subscribe({
+      next: (temDependencias) => {
+        if (temDependencias) {
+          console.log('Dependências verificadas:', temDependencias);
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não é possível deletar este docente, pois ele possui turmas ou avaliações vinculadas.' });
+        } else {
+          console.log("Nao tem dependencias")
+          this.userService.removerUsuario(this.docenteId).subscribe({
+            next: () => {
+              this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Docente removido com sucesso' });
+              this.router.navigate(['/home']);
+            },
+            error: (error) => {
+              this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao remover docente.' });
+            }
+          });
+        }
+      },
+      error: (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao verificar dependências do docente.' });
+      }
+    });
+  }
+  confirmDeletarDocente(): void {
+    this.confirmationService.confirm({
+      message: 'Tem certeza que deseja deletar este docente? Esta ação não pode ser desfeita.',
+      accept: () => {
+        this.deletarDocente();
+      }
     });
   }
 }

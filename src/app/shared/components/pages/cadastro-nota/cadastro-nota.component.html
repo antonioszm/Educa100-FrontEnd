@@ -58,10 +58,25 @@
             formControlName="aluno" 
             placeholder="Selecione um aluno"
             optionLabel="nomeCompleto" 
-            filter="true">
+            filter="true"
+            onselect="carregarTurmas(aluno)">
           </p-dropdown>
           <div *ngIf="notaForm.get('aluno')?.invalid && notaForm.get('aluno')?.touched">
             <small class="p-error">Aluno é obrigatório.</small>
+          </div>
+        </div>
+
+        <!-- Turma -->
+        <div class="field">
+          <label for="turma">Turma</label>
+          <p-dropdown 
+            [options]="turmasDisponiveis" 
+            formControlName="turma" 
+            placeholder="Selecione uma turma"
+            optionLabel="nome">
+          </p-dropdown>
+          <div *ngIf="notaForm.get('turma')?.invalid && notaForm.get('turma')?.touched">
+            <small class="p-error">Turma é obrigatória e tanto o Aluno quanto o Professor devem estar nela.</small>
           </div>
         </div>
 
@@ -77,7 +92,7 @@
     </div>
 
     <div class="buttons">
-      <button pButton type="submit" label="Salvar" [disabled]="!notaForm.valid"></button>
+      <button pButton type="submit" label="Salvar" [disabled]="!notaForm.valid  || notaForm.get('turma')?.hasError('invalidTurma') "></button>
       <button pButton type="button" label="Editar" disabled></button>
       <button pButton type="button" label="Deletar" disabled></button>
     </div>

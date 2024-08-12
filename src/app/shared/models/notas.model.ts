@@ -1,3 +1,4 @@
+import type { Turma } from "./turma.model";
 import { User } from "./user.model";
 
 export interface Notas {
@@ -8,4 +9,5 @@ export interface Notas {
     dataAvaliacao: Date;
     aluno: User;
     nota: number;
+    turma : Turma
 }

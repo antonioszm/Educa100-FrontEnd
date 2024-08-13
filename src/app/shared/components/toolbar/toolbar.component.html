@@ -1,25 +1,29 @@
 <p-toolbar>
     <div class="p-toolbar-group-start">
         <app-menu-lateral></app-menu-lateral>
-        <h2>Titulo</h2>
+        <h2>{{ titulo }}</h2>
     </div>
+
     <div class="p-toolbar-group-center">
         <div class="links">
-            <a href="home" >Inicio </a>
-            <a *ngIf="usuarioADM" href="cadastro-docente">Criar Docente </a>
-            <a *ngIf="usuarioADM" href="cadastro-aluno">Criar Aluno </a>
-            <a *ngIf="usuarioADM || usuarioDocente"href="cadastro-turma">Criar Turma </a>
-            <a *ngIf="usuarioADM || usuarioDocente"href="cadastro-nota">Criar Nota </a>
-            <a *ngIf="usuarioADM" href="listagem-docentes">Lista de Docentes </a>
-            <a *ngIf="usuarioAluno" href="notas">Notas</a>
+            <a href="home"><i class="pi pi-home"></i> Início</a>
+            <a *ngIf="usuarioADM" href="cadastro-docente"><i class="pi pi-user-plus"></i> Criar Docente</a>
+            <a *ngIf="usuarioADM" href="cadastro-aluno"><i class="pi pi-user-plus"></i> Criar Aluno</a>
+            <a *ngIf="usuarioADM || usuarioDocente" href="cadastro-turma"><i class="pi pi-calendar-plus"></i> Criar Turma</a>
+            <a *ngIf="usuarioADM || usuarioDocente" href="cadastro-nota"><i class="pi pi-pencil"></i> Criar Nota</a>
+            <a *ngIf="usuarioADM" href="listagem-docentes"><i class="pi pi-users"></i> Lista de Docentes</a>
+            <a *ngIf="usuarioAluno" href="notas-aluno"><i class="pi pi-list"></i> Notas</a>
         </div>
     </div>
+
     <div class="p-toolbar-group-end">
-        <p-avatar 
-        image="user.png" 
-        shape="circle" />
-    <span class="font-bold text-bluegray-50">
-        user
-    </span>
+        <div class="user-section" (click)="toggleLogout()">
+            <p-avatar image="user.png" shape="circle"></p-avatar>
+            <span class="font-bold text-bluegray-50">{{ nomeUsuario }}</span>
+            <div *ngIf="showLogout" class="logout">
+                <i class="pi pi-sign-out"></i>
+                <span (click)="deslogar()">Logout</span>
+            </div>
+        </div>
     </div>
 </p-toolbar>

@@ -20,11 +20,15 @@ export class ToolbarComponent {
   usuarioAluno: boolean = false;
   usuarioDocente: boolean = false;
   usuarioADM: boolean = false;
+  nomeUsuario: string | null = '';
+  titulo: string = '';
+  showLogout = false;
 
   constructor(private authService: AuthService){}
 
   ngOnInit(): void {
     this.checarPerfilUsuario();
+    this.obterNomeUsuario();
   }
   checarPerfilUsuario(): void {
     if (this.authService.verificarSeForDocente()) {
@@ -43,4 +47,18 @@ export class ToolbarComponent {
       this.usuarioADM = true;
     }
   }
+  obterNomeUsuario(): void {
+    const usuarioLogado = localStorage.getItem('usuariologado');
+    if (usuarioLogado) {
+        const user = JSON.parse(usuarioLogado);
+        this.nomeUsuario = user.nomeCompleto;
+    }
+  }
+  toggleLogout(): void {
+    this.showLogout = !this.showLogout;
+  }
+  deslogar(){
+    this.authService.logout()
+  }
+
 }

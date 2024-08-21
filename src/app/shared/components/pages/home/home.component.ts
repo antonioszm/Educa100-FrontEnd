@@ -144,7 +144,7 @@ export class HomeComponent {
   redirecionarCadastro(id: number): void {
     this.router.navigate(['/cadastro-aluno'], { queryParams: { id: id } });
   }
-  redirecionarParaLancarNota(): void {
-    //implementar
+  redirecionarParaLancarNota(id: number): void {
+    this.router.navigate(['/cadastro-nota'], { queryParams: { id: id } });
   }
 }

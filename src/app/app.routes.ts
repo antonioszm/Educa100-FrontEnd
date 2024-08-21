@@ -58,6 +58,11 @@ export const routes: Routes = [
         canActivate: [logadoGuard, admOuDocenteGuard]
     },
     {
+        path: "cadastro-nota/:id",
+        component: CadastroNotaComponent,
+        canActivate: [logadoGuard, admOuDocenteGuard]
+    },
+    {
         path: "listagem-docentes",
         component: ListagemDocentesComponent,
         canActivate: [logadoGuard, admGuard]

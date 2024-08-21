@@ -31,7 +31,7 @@
         </ng-template>
         <ng-template pTemplate="footer">
           <p-button *ngIf="usuarioADM" label="Ver mais" styleClass="p-button-success w-10rem" (click)="redirecionarCadastro(aluno.id)" />
-          <p-button *ngIf="usuarioDocente" label="Lançar nota" styleClass="p-button-success w-10rem" (click)="redirecionarParaLancarNota()" />
+          <p-button *ngIf="usuarioDocente" label="Lançar nota" styleClass="p-button-success w-10rem" (click)="redirecionarParaLancarNota(aluno.id)" />
         </ng-template>
     </p-card>
 </div>

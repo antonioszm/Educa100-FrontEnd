@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { UserService } from '../../../services/user.service';
 import { AuthService } from '../../../services/auth.service';
@@ -36,8 +36,9 @@ export class CadastroNotaComponent implements OnInit  {
   isAdm: boolean = false;
   isDocente: boolean = false;
   turmasDisponiveis: Turma[] = [];
+  alunoId!: number;
 
-  constructor(private fb: FormBuilder,private messageService: MessageService,private router: Router,private userService: UserService,private authService: AuthService,private notaService: NotaService, private turmaService: TurmaService) {}
+  constructor(private fb: FormBuilder,private messageService: MessageService,private router: Router,private userService: UserService,private authService: AuthService,private notaService: NotaService, private turmaService: TurmaService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     const usuarioLogado = this.authService.getUsuarioLogado();
@@ -86,6 +87,14 @@ export class CadastroNotaComponent implements OnInit  {
     this.notaForm.get('turma')?.valueChanges.subscribe(() => {
       this.verificarTurmaValida();
     });
+    
+    this.route.queryParams.subscribe(params => {
+      const id = params['id'];
+      if (id) {
+        this.alunoId = +id;
+        this.carregarAluno(this.alunoId);
+      }
+    });
   }
 
   inicializarFormulario(usuarioLogado: User): void {
@@ -103,6 +112,13 @@ export class CadastroNotaComponent implements OnInit  {
       this.notaForm.patchValue({ professor: usuarioLogado });
       this.notaForm.get('professor')?.disable();
     }
+  }
+  carregarAluno(id: number): void {
+    this.userService.listarUsuarioPorId(id).subscribe(aluno => {
+      this.notaForm.patchValue({
+        aluno: aluno
+      });
+    });
   }
 
   onSubmit(): void {

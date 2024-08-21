@@ -43,6 +43,11 @@ export const routes: Routes = [
         canActivate: [logadoGuard, admGuard]
     },
     {
+        path: "cadastro-aluno/:id",
+        component: CadastroAlunoComponent,
+        canActivate: [logadoGuard, admGuard]
+    },
+    {
         path: "cadastro-turma",
         component: CadastroTurmaComponent,
         canActivate: [logadoGuard, admOuDocenteGuard]

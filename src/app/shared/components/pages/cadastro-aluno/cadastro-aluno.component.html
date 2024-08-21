@@ -150,11 +150,11 @@
         </div>
       </div>
     </div>
-
+    <p-confirmDialog header="Confirmação" icon="pi pi-exclamation-triangle"></p-confirmDialog>
     <div class="buttons">
-      <button pButton type="submit" label="Salvar" (onClick)="showSuccess()" [disabled]="!alunoForm.valid"></button>
-      <button pButton type="button" label="Editar" disabled></button>
-      <button pButton type="button" label="Deletar" disabled></button>
+      <button pButton type="submit" label="Salvar" (onClick)="showSuccess()" [disabled]="!isSalvavel &&!alunoForm.valid"></button>
+      <button pButton type="button" label="Editar" (click)="atualizarAluno()" disabled [disabled]="!isEditavel && !alunoForm.valid"></button>
+      <button pButton type="button" label="Deletar" (click)="confirmDeletarAluno()"disabled [disabled]="!isDeletavel && !alunoForm.valid"></button>
     </div>
   </form>
 </div>

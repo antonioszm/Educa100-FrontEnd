@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { forkJoin, map, Observable } from 'rxjs';
+import { forkJoin, map, Observable, of, switchMap } from 'rxjs';
 import type { Notas } from '../models/notas.model';
 import type { Turma } from '../models/turma.model';
+import { TurmaService } from './turma.service';
+import { NotaService } from './nota.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,7 @@ export class UserService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private turmaService: TurmaService, private notasService: NotaService) { }
 
   listarUsuarios(): Observable<any[]> {
     return this.http.get<any[]>(this.usersUrl);
@@ -57,30 +59,28 @@ export class UserService {
   }
 
   verificarDependencias(usuarioId: number, papel: string): Observable<boolean> {
-    const turmas$: Observable<Turma[]> = this.http.get<Turma[]>(this.turmasUrl);
-    const notas$: Observable<Notas[]> = this.http.get<Notas[]>(this.notasUrl);
-
-    return forkJoin([turmas$, notas$]).pipe(
-      map(([turmas, notas]) => {
-        console.log('Papel:', papel);  // Verifique o valor de `papel`
-        console.log('Usuario ID:', usuarioId);  // Verifique o valor de `usuarioId`
-
-        console.log('Turmas:', turmas);
-        console.log('notas:', notas);
-        console.log(papel === 'DOCENTE')
+    return this.listarUsuarioPorId(usuarioId).pipe(
+      switchMap(usuario => {
+        let temDependencias = false;
         if (papel === 'DOCENTE') {
-          console.log(papel === 'DOCENTE')
-          const temTurmas = turmas.some(turma => turma.professor.id === usuarioId);
-          const temAvaliacoes = notas.some(nota => nota.professor.id === usuarioId);
-          console.log("a")
-          console.log(temTurmas || temAvaliacoes)
-          return temTurmas || temAvaliacoes;
+          return forkJoin([
+            this.turmaService.listarTurmasPorDocenteId(usuarioId),
+            this.notasService.listarNotasPorDocenteId(usuarioId)
+          ]).pipe(
+            map(([turmasDocente, notasDocente]) => {
+              temDependencias = turmasDocente.length > 0 || notasDocente.length > 0;
+              return temDependencias;
+            })
+          );
         } else if (papel === 'ALUNO') {
-          const temTurmas = turmas.some(turma => turma.professor.id === usuarioId && turma.professor.papel === 'ALUNO');
-          const temAvaliacoes = notas.some(nota => nota.aluno.id === usuarioId);
-          return temTurmas || temAvaliacoes;
+          return this.notasService.listarNotasPorAlunoId(usuarioId).pipe(
+            map(notasUsuario => {
+              temDependencias = usuario.turmas && usuario.turmas.length > 0 || notasUsuario.some(nota => nota.aluno.id === usuarioId);
+              return temDependencias;
+            })
+          );
         }
-        return false;
+        return of(temDependencias); 
       })
     );
   }

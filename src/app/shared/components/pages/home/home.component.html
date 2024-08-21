@@ -30,7 +30,7 @@
             <p>Contato: {{ aluno.telefone || aluno.email }}</p>
         </ng-template>
         <ng-template pTemplate="footer">
-          <p-button *ngIf="usuarioADM" label="Ver mais" styleClass="p-button-success w-10rem" (click)="redirecionarCadastro()" />
+          <p-button *ngIf="usuarioADM" label="Ver mais" styleClass="p-button-success w-10rem" (click)="redirecionarCadastro(aluno.id)" />
           <p-button *ngIf="usuarioDocente" label="Lançar nota" styleClass="p-button-success w-10rem" (click)="redirecionarParaLancarNota()" />
         </ng-template>
     </p-card>

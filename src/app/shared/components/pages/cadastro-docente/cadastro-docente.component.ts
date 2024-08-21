@@ -32,8 +32,10 @@ export class CadastroDocenteComponent implements OnInit{
     { label: 'SQL', value: 'SQL' }
   ];
   docenteId!: number;
-  isDeletavel!: boolean
-  isEditavel!: boolean
+  isDeletavel: boolean = false;
+  isEditavel: boolean = false;
+  isSalvavel: boolean = true;
+
 
 
   constructor(private fb: FormBuilder, private http: HttpClient, private messageService: MessageService, private router: Router, private userService: UserService, private route: ActivatedRoute, private confirmationService: ConfirmationService) {}
@@ -105,9 +107,11 @@ export class CadastroDocenteComponent implements OnInit{
   }
 
   enableButtons(): void {
-    this.isDeletavel = true
-    this.isEditavel = true
+    this.isDeletavel = true;
+    this.isEditavel = true;
+    this.isSalvavel = false;
   }
+
 
   buscarEndereco(): void {
     const cep = this.docenteForm.get('cep')?.value;

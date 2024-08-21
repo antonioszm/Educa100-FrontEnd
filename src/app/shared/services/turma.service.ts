@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import type { Turma } from '../models/turma.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,10 @@ export class TurmaService {
     return this.http.delete<any>(url, this.httpOptions);
   }
 
+  listarTurmasPorDocenteId(docenteId: number): Observable<Turma[]> {
+    const url = `${this.turmasUrl}?professor.id=${docenteId}`;
+    return this.http.get<Turma[]>(url);
+  }
   atualizarTurma(turma: any): Observable<any> {
     return this.http.put(this.turmasUrl, turma, this.httpOptions);
   }

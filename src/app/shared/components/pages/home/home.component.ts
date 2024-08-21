@@ -132,7 +132,6 @@ export class HomeComponent {
       const usuarioLogado = localStorage.getItem('usuariologado');
       if (usuarioLogado) {
           const user = JSON.parse(usuarioLogado);
-          this.materiasCursando = user.materias.split(',').map((mat: string) => mat.trim());
           this.userService.listarAvaliacoesDoAluno(user.id).subscribe(avaliacoes => {
               this.listaDeAvaliacoes = avaliacoes.slice(0, 3);
           });
@@ -142,8 +141,8 @@ export class HomeComponent {
   redirecionarParaNota(avaliacao: Notas): void {
     this.router.navigate(['/notas-aluno'], { queryParams: { id: avaliacao.id } });
   }
-  redirecionarCadastro(): void {
-    //implementar
+  redirecionarCadastro(id: number): void {
+    this.router.navigate(['/cadastro-aluno'], { queryParams: { id: id } });
   }
   redirecionarParaLancarNota(): void {
     //implementar

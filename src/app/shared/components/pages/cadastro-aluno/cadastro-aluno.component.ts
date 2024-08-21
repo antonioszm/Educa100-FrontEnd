@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { CommonModule } from '@angular/common';
@@ -12,19 +12,25 @@ import { MessagesModule } from 'primeng/messages';
 import { UserService } from '../../../services/user.service';
 import { ToolbarComponent } from "../../toolbar/toolbar.component";
 import { TurmaService } from '../../../services/turma.service';
+import { ActivatedRoute } from '@angular/router'; 
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+
 @Component({
   selector: 'app-cadastro-aluno',
   standalone: true,
-  imports: [MultiSelectModule, CommonModule, DropdownModule, CalendarModule, ReactiveFormsModule, ToastModule, MessagesModule, ToolbarComponent],
+  imports: [MultiSelectModule, CommonModule, DropdownModule, CalendarModule, ReactiveFormsModule, ToastModule, MessagesModule, ToolbarComponent, ConfirmDialogModule],
   templateUrl: './cadastro-aluno.component.html',
   styleUrl: './cadastro-aluno.component.scss'
 })
-export class CadastroAlunoComponent {
+export class CadastroAlunoComponent implements OnInit{
   alunoForm!: FormGroup;
   generos = [{ label: 'Masculino', value: 'M' }, { label: 'Feminino', value: 'F' }, { label: 'Outro', value: 'O' }, { label: 'Prefiro não informar', value: 'N' }];
   turmasDisponiveis: any[] = [];
-
-  constructor(private fb: FormBuilder, private http: HttpClient, private messageService: MessageService, private router: Router, private userService: UserService, private turmaService: TurmaService) {}
+  alunoId!: number;
+  isDeletavel: boolean = false;
+  isEditavel: boolean = false;
+  isSalvavel: boolean = true;
+  constructor(private fb: FormBuilder, private http: HttpClient, private messageService: MessageService, private router: Router, private userService: UserService, private turmaService: TurmaService, private route: ActivatedRoute, private confirmationService: ConfirmationService) {}
 
   ngOnInit(): void {
     this.http.get('http://localhost:3000/users').subscribe({
@@ -60,8 +66,51 @@ export class CadastroAlunoComponent {
       complemento: [''],
       bairro: ['', Validators.required],
       pontoDeReferencia: [''],
-      turmas: [[], Validators.required]
+      turmas: [[]]
     });
+
+    this.route.queryParams.subscribe(params => {
+      const id = params['id'];
+      if (id) {
+        this.alunoId = +id;
+        this.carregarAluno(this.alunoId);
+      }
+    });
+  }
+  carregarAluno(id: number): void {
+    this.userService.listarUsuarioPorId(id).subscribe(aluno => {
+      const dataNascimento = aluno.dataNascimento ? new Date(aluno.dataNascimento) : null;
+
+      this.alunoForm.patchValue({
+        nomeCompleto: aluno.nomeCompleto,
+        genero: aluno.genero,
+        dataNascimento: dataNascimento,
+        cpf: aluno.cpf,
+        rg: aluno.rg,
+        telefone: aluno.telefone,
+        email: aluno.email,
+        senha: aluno.senha,
+        naturalidade: aluno.naturalidade,
+        cep: aluno.cep,
+        cidade: aluno.cidade,
+        estado: aluno.estado,
+        logradouro: aluno.logradouro,
+        numero: aluno.numero,
+        complemento: aluno.complemento,
+        bairro: aluno.bairro,
+        pontoDeReferencia: aluno.pontoDeReferencia,
+        turmas: aluno.turmas
+      });
+  
+      this.enableButtons();
+      this.atualizarValidacaoTurmas()
+    });
+  }
+  
+  enableButtons(): void {
+    this.isDeletavel = true;
+    this.isEditavel = true;
+    this.isSalvavel = false;
   }
 
   buscarEndereco(): void {
@@ -121,7 +170,7 @@ export class CadastroAlunoComponent {
       key: 'success', 
       severity: 'success', 
       summary: 'Sucesso', 
-      detail: 'Docente com sucesso!', 
+      detail: 'aluno com sucesso!', 
       life: 3000
     });
   }
@@ -135,4 +184,87 @@ export class CadastroAlunoComponent {
       life: 3000 
     });
   }
+  atualizarAluno(): void {
+    console.log('Formulário enviado para update:', this.alunoForm.value);
+  
+    if (this.alunoForm.valid) {
+      const aluno = {
+        ...this.alunoForm.value,
+        papel: 'ALUNO',
+        id: this.alunoId,
+        endereco: {
+          cep: this.alunoForm.value.cep,
+          cidade: this.alunoForm.value.cidade,
+          estado: this.alunoForm.value.estado,
+          logradouro: this.alunoForm.value.logradouro,
+          numero: this.alunoForm.value.numero,
+          complemento: this.alunoForm.value.complemento,
+          bairro: this.alunoForm.value.bairro,
+          pontoDeReferencia: this.alunoForm.value.pontoDeReferencia
+        }
+      };
+  
+      console.log('Dados enviados para API {update}:', aluno);
+  
+      this.userService.atualizarUsuario(aluno).subscribe({
+        next: () => {
+          console.log('Aluno atualizado com sucesso');
+          this.showSuccess();
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Aluno atualizado com sucesso' });
+          setTimeout(() => {
+            this.router.navigate(['/home']);
+          }, 3000);
+        },
+        error: (error) => {
+          console.error('Erro ao atualizar aluno:', error);
+          this.showError();
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao atualizar aluno' });
+        }
+      });
+    } else {
+      console.error('Formulário inválido');
+      this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Formulário inválido' });
+    }
+  }
+  deletarAluno(): void {
+    this.userService.verificarDependencias(this.alunoId, 'ALUNO').subscribe({
+      next: (temDependencias) => {
+        if (temDependencias) {
+          console.log('Dependências verificadas:', temDependencias);
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não é possível deletar este aluno, pois ele possui turmas ou avaliações vinculadas.' });
+        } else {
+          console.log("Não tem dependências");
+          this.userService.removerUsuario(this.alunoId).subscribe({
+            next: () => {
+              this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Aluno removido com sucesso' });
+              this.router.navigate(['/home']);
+            },
+            error: (error) => {
+              this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao remover aluno.' });
+            }
+          });
+        }
+      },
+      error: (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao verificar dependências do aluno.' });
+      }
+    });
+  }
+  
+  confirmDeletarAluno(): void {
+    this.confirmationService.confirm({
+      message: 'Tem certeza que deseja deletar este aluno? Esta ação não pode ser desfeita.',
+      accept: () => {
+        this.deletarAluno();
+      }
+    });
+  }  
+  atualizarValidacaoTurmas(): void {
+    if (this.isEditavel) {
+      this.alunoForm.get('turmas')?.clearValidators();
+    } else {
+      this.alunoForm.get('turmas')?.setValidators(Validators.required);
+    }
+    this.alunoForm.get('turmas')?.updateValueAndValidity();
+  } 
 }

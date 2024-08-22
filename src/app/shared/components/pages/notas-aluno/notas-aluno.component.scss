@@ -10,25 +10,6 @@ h2 {
   text-align: center;
 }
 
-p-table {
-  width: 100%;
-  margin-top: 20px;
-}
-
-th, td {
-  text-align: left;
-  padding: 10px;
-}
-
-th {
-  background-color: #f4f4f4;
-  font-weight: bold;
-}
-
-tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-tr:hover {
-  background-color: #f1f1f1;
+p-card {
+  margin: 20px;
 }

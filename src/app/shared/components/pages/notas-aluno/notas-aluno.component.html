@@ -1,10 +1,32 @@
 <app-toolbar></app-toolbar>
 <div class="container">
+  <h2>Seus dados:</h2>
+  <p-card>
+    <ng-template pTemplate="content">
+      <p><strong>Nome:</strong> {{ alunoLogado.nomeCompleto }}</p>
+      <p><strong>Data de nascimento:</strong> {{ alunoLogado.dataDeNascimento | date:'dd/MM/yyyy' }}</p>
+      <p><strong>CPF:</strong> {{ alunoLogado.cpf }}</p>
+      <p><strong>Telefone:</strong> {{ alunoLogado.telefone }}</p>
+      <p><strong>Gênero:</strong> {{ alunoLogado.genero }}</p>
+    </ng-template>
+  </p-card>
+  <p-divider layout="horizontal" styleClass="flex md:hidden" [align]="'center'"></p-divider>
+  <h2>Sua turma:</h2>
+  <div *ngFor="let turma of alunoLogado.turmas">
+    <p-card>
+      <ng-template pTemplate="content" >
+        <p><strong>Nome:</strong> {{ turma.nome }}</p>
+        <p><strong>Professor:</strong> {{ turma.professor }}</p>
+        <p><strong>Horario:</strong> {{ turma.horario | date: 'HH:mm'}}</p>
+      </ng-template>
+    </p-card>
+  </div>
+  <p-divider layout="horizontal" styleClass="flex md:hidden" [align]="'center'"></p-divider>
   <h2>Histórico de Notas</h2>
-
-  <p-table [value]="notas">
+  <p-table [value]="notas" [tableStyle]="{ 'min-width': '50rem' }">
     <ng-template pTemplate="header">
       <tr>
+        <th>ID</th>
         <th>Turma</th>
         <th>Docente</th>
         <th>Matéria</th>
@@ -15,6 +37,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-nota>
       <tr>
+        <td>{{ nota.id || 'N/A'}}</td>
         <td>{{ nota.turma?.nome || 'N/A'}}</td>
         <td>{{ nota.professor?.nomeCompleto || 'N/A' }}</td>
         <td>{{ nota.nomeDaMateria }}</td>

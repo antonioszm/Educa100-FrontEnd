@@ -26,56 +26,6 @@
       "materias": "Matemática, Física"
     },
     {
-      "id": "4",
-      "nomeCompleto": "Pedro Henrique",
-      "email": "pedro@outlook.com",
-      "senha": "123",
-      "papel": "ALUNO",
-      "genero": "Masculino",
-      "dataDeNascimento": "2000-09-15",
-      "cpf": "987.654.321-00",
-      "rg": "98.765.432-1",
-      "telefone": "(21) 91234-5678",
-      "naturalidade": "Rio de Janeiro, RJ",
-      "endereco": {
-        "cep": "20000-000",
-        "cidade": "Rio de Janeiro",
-        "estado": "RJ",
-        "logradouro": "Rua B",
-        "numero": "200",
-        "complemento": "Casa 2",
-        "bairro": "Botafogo",
-        "pontoDeReferencia": "Perto do shopping"
-      },
-      "turmas": [],
-      "materias": "Química, Biologia"
-    },
-    {
-      "id": "5",
-      "nomeCompleto": "Claudio Lima",
-      "email": "claudio@outlook.com",
-      "senha": "123",
-      "papel": "ALUNO",
-      "genero": "Masculino",
-      "dataDeNascimento": "1995-07-30",
-      "cpf": "111.222.333-44",
-      "rg": "11.222.333-4",
-      "telefone": "(31) 92345-6789",
-      "naturalidade": "Belo Horizonte, MG",
-      "endereco": {
-        "cep": "30000-000",
-        "cidade": "Belo Horizonte",
-        "estado": "MG",
-        "logradouro": "Rua C",
-        "numero": "300",
-        "complemento": "",
-        "bairro": "Savassi",
-        "pontoDeReferencia": "Ao lado da padaria"
-      },
-      "turmas": [],
-      "materias": "História, Geografia"
-    },
-    {
       "id": "2",
       "email": "professor@outlook.com",
       "senha": "123",

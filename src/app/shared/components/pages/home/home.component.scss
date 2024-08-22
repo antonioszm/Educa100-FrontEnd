@@ -62,10 +62,19 @@
     }
   }
   
-  .alunos-listagem, .avaliacoes-listagem, .materias-listagem, .cursos-listagem {
+  .alunos-listagem {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
     margin-top: 20px;
     
+  }
+
+  .avaliacoes-listagem, .materias-listagem, .cursos-listagem {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    justify-items: center; 
+    align-items: center; 
+    height: 100%;
   }

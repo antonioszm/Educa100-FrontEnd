@@ -12,15 +12,12 @@ import { Notas } from '../../../models/notas.model';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToolbarComponent } from '../../toolbar/toolbar.component';
 import { ButtonModule } from 'primeng/button';
-
-
-
-
+import { DividerModule } from 'primeng/divider';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [PanelModule,CardModule, SplitterModule, CommonModule, CardModule, FormsModule, InputTextModule, ToolbarComponent,ButtonModule],
+  imports: [PanelModule,CardModule, SplitterModule, CommonModule, CardModule, FormsModule, InputTextModule, ToolbarComponent,ButtonModule, DividerModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

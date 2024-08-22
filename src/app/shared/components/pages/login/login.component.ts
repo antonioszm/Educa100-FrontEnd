@@ -9,10 +9,12 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { PasswordModule } from 'primeng/password';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MessageService } from 'primeng/api';
+
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ButtonModule, DividerModule, InputTextModule, FloatLabelModule, PasswordModule, HttpClientModule, CommonModule, FormsModule,],
+  imports: [ButtonModule, DividerModule, InputTextModule, FloatLabelModule, PasswordModule, HttpClientModule, CommonModule, FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -21,15 +23,15 @@ export class LoginComponent {
   senha: string = '';
   erro: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private messageService: MessageService) {}
 
   verificarLogin() {
     this.authService.login(this.email, this.senha).subscribe(valido => {
       if (valido) {
-        this.router.navigate(['/home']); // mudar para a home condizente com o papel
+        this.router.navigate(['/home']); 
         console.log("logado")
       } else {
-        this.erro = 'Email ou senha incorretos';
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Senha ou usuario incorretos' });
       }
     });
   }

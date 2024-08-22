@@ -1,27 +1,77 @@
 # Educa100FrontEnd
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.0.
+Este projeto é uma aplicação web desenvolvida em Angular que simula um portal educacional, inspirado no projeto Educa100 em Java. O sistema suporta três tipos de usuários: alunos, professores e administradores, cada um com funcionalidades específicas.
+## Tecnologias 
+- Angular 18
+- TypeScript
+- SCSS
+- HTML
+- JSON
+- Metodología GitFLow
+- Kanban/Trello
 
-## Development server
+## Funcionalidades
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Administradores
+- Criar, deletar e atualizar informações de alunos e docentes.
+- Criar turmas.
+- Visualizar todos os docentes e alunos cadastrados.
 
-## Code scaffolding
+### Docentes
+- Criar notas para os alunos.
+- Visualizar todos os alunos.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Alunos
+- Visualizar suas próprias notas.
 
-## Build
+## Rotas Disponíveis
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+O sistema possui várias rotas para atender às diferentes necessidades dos usuários:
 
-## Running unit tests
+- `/login`: Rota para autenticação de usuários.
+- `/home`: Página inicial após o login.
+- `/cadastro-turma`: Para administradores criarem novas turmas.
+- `/cadastro-nota`: Para docentes registrarem notas dos alunos.
+- `/cadastro-aluno`: Para administradores cadastrarem novos alunos.
+- `/cadastro-docente`: Para administradores cadastrarem novos docentes.
+- `/listagem-docente`: Para visualizar todos os docentes cadastrados.
+- `/notas-aluno`: Para alunos visualizarem suas notas.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+O sistema também implementa uma lógica de bloqueio de rotas baseada no tipo de usuário logado, garantindo que cada usuário só tenha acesso às funcionalidades permitidas para seu perfil.
 
-## Running end-to-end tests
+## Como Iniciar o Projeto
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Para iniciar este projeto, você precisará de dois terminais abertos simultaneamente:
 
-## Further help
+``` ng serve ```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+``` npx json-server --watch db.json ```
+
+Antes de iniciar o projeto, certifique-se de instalar todas as dependências necessárias executando o seguinte comando na raiz do projeto:
+
+``` npm install ```
+
+## Instalação das Dependências
+
+Para baixar e instalar todas as dependências necessárias para o projeto, siga os passos abaixo:
+
+1. Abra um terminal na pasta do projeto.
+2. Execute o comando `npm install`.
+3. Após a conclusão da instalação, você pode prosseguir com os passos descritos anteriormente para iniciar o projeto.
+
+## Instalação do Angular CLI
+
+Se você ainda não tem o Angular CLI instalado globalmente em sua máquina, siga os passos abaixo para instalá-lo:
+
+1. Abra um terminal.
+2. Execute o seguinte comando para instalar o Angular CLI globalmente:
+
+``` npm install -g @angular/cli```
+
+Este comando instalará a versão mais recente do Angular CLI, permitindo que você crie novos projetos Angular, gere componentes, serviços e muito mais.
+
+## Uso da Biblioteca Externa NG Prime
+
+Neste projeto, foi utilizada a biblioteca externa NG Prime para melhorar a interface do usuário com componentes prontos e estilizados. Para adicionar o NG Prime ao seu projeto, execute o seguinte comando:
+
+``` npm install primeng primeicons --save```

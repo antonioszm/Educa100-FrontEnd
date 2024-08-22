@@ -72,6 +72,4 @@ Este comando instalará a versão mais recente do Angular CLI, permitindo que vo
 
 ## Uso da Biblioteca Externa NG Prime
 
-Neste projeto, foi utilizada a biblioteca externa NG Prime para melhorar a interface do usuário com componentes prontos e estilizados. Para adicionar o NG Prime ao seu projeto, execute o seguinte comando:
-
-``` npm install primeng primeicons --save```
+Neste projeto, foi utilizada a biblioteca externa NG Prime para melhorar a interface do usuário com componentes prontos e estilizados.

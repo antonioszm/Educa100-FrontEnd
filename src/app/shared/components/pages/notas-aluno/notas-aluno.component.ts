@@ -7,12 +7,14 @@ import { User } from '../../../models/user.model';
 import { ToolbarComponent } from '../../toolbar/toolbar.component';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
+import { CardModule } from 'primeng/card';
+import { DividerModule } from 'primeng/divider';
 
 
 @Component({
   selector: 'app-notas-aluno',
   standalone: true,
-  imports: [ToolbarComponent, TableModule, CommonModule],
+  imports: [ToolbarComponent, TableModule, CommonModule,CardModule, DividerModule],
   templateUrl: './notas-aluno.component.html',
   styleUrl: './notas-aluno.component.scss'
 })

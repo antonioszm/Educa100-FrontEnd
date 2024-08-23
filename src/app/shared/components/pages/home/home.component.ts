@@ -13,6 +13,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ToolbarComponent } from '../../toolbar/toolbar.component';
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
+import type { User } from '../../../models/user.model';
 
 @Component({
   selector: 'app-home',
@@ -37,27 +38,21 @@ export class HomeComponent {
     usuarioAluno: boolean = false;
     usuarioDocente: boolean = false;
     usuarioADM: boolean = false;
-    nomeUsuario: string | null = '';
+    usuarioLogado!: User;
 
     constructor(private userService: UserService, private turmaService: TurmaService, private authService: AuthService, private router: Router){}
 
 
     ngOnInit(): void {
+      this.usuarioLogado = this.authService.getUsuarioLogado() as User;
+
       this.checarPerfilUsuario();
       this.verificarAlunos();
       this.verificarDocentes();
       this.verificarTurmas();
       this.carregarDadosDoAluno();
-      this.obterNomeUsuario();
+      this.verificarMaterias()
     }
-
-    obterNomeUsuario(): void {
-      const usuarioLogado = localStorage.getItem('usuariologado');
-      if (usuarioLogado) {
-          const user = JSON.parse(usuarioLogado);
-          this.nomeUsuario = user.nomeCompleto;
-      }
-  }
 
     //funcoes de autorizacao
     checarPerfilUsuario(): void {
@@ -79,28 +74,25 @@ export class HomeComponent {
   }
 
     //funcoes Docente / ADM
-    verificarAlunos(): number {
+    verificarAlunos(): void {
       this.userService.listarAlunos().subscribe(alunos => {
         this.listaDeAlunos = alunos;
+        this.numeroDeAlunos = this.listaDeAlunos.length
       });
-      this.numeroDeAlunos = this.listaDeAlunos.length
-      return this.numeroDeAlunos
     }
 
-    verificarDocentes(): number {
+    verificarDocentes(): void {
       this.userService.listarDocentes().subscribe(docentes => {
         this.listaDeDocentes = docentes;
+        this.numeroDeDocentes = this.listaDeDocentes.length
       });
-      this.numeroDeDocentes = this.listaDeDocentes.length
-      return this.numeroDeDocentes  
     }
 
-    verificarTurmas(): number {
+    verificarTurmas(): void {
       this.turmaService.listarTurmas().subscribe(turmas => {
         this.listaDeTurmas = turmas;
+        this.numeroDeTurmas = this.listaDeTurmas.length
       });
-      this.numeroDeTurmas = this.listaDeTurmas.length
-      return this.numeroDeTurmas  
     }
 
     filtrarAlunos(): any[] {
@@ -119,9 +111,18 @@ export class HomeComponent {
 
     calcularIdade(dataDeNascimento: Date): number {
       const nascimento = new Date(dataDeNascimento);
-      const diferenca = Date.now() - nascimento.getTime();
-      const idade = new Date(diferenca).getUTCFullYear() - 1970;
-      return idade;
+
+      console.log(dataDeNascimento)
+    
+      const hoje = new Date();
+    
+      let idade = hoje.getFullYear() - nascimento.getFullYear();
+      const mes = hoje.getMonth() - nascimento.getMonth();
+    
+      if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
+        idade--;
+      }
+      return idade
     }
 
   //funcoes Aluno
@@ -130,9 +131,22 @@ export class HomeComponent {
       if (usuarioLogado) {
           const user = JSON.parse(usuarioLogado);
           this.userService.listarAvaliacoesDoAluno(user.id).subscribe(avaliacoes => {
-              this.listaDeAvaliacoes = avaliacoes.slice(0, 3);
+              this.listaDeAvaliacoes = avaliacoes
+                  .sort((nota1, nota2) => new Date(nota2.dataAvaliacao).getTime() - new Date(nota1.dataAvaliacao).getTime())
+                  .slice(0, 3);
           });
       }
+  } 
+  verificarMaterias(): void {
+    this.usuarioLogado.turmas.forEach(turma => {
+      const listaMaterias = turma.professor.materias.split(',').map(materia => materia.trim());
+      listaMaterias.forEach(materia => {
+        if (!this.materiasCursando.includes(materia)) {
+          this.materiasCursando.push(materia);
+        }
+      });
+    });
+    console.log(this.materiasCursando)
   } 
 
   redirecionarParaNota(avaliacao: Notas): void {

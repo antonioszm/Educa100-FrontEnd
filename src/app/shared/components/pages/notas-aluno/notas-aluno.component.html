@@ -16,8 +16,8 @@
     <p-card>
       <ng-template pTemplate="content" >
         <p><strong>Nome:</strong> {{ turma.nome }}</p>
-        <p><strong>Professor:</strong> {{ turma.professor }}</p>
-        <p><strong>Horario:</strong> {{ turma.horario | date: 'HH:mm'}}</p>
+        <p><strong>Professor:</strong> {{ turma.professor.nomeCompleto }}</p>
+        <p><strong>Horario:</strong> {{ turma.horario }}</p>
       </ng-template>
     </p-card>
   </div>

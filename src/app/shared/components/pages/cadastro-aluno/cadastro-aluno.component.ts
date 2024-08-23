@@ -27,9 +27,9 @@ export class CadastroAlunoComponent implements OnInit{
   generos = [{ label: 'Masculino', value: 'M' }, { label: 'Feminino', value: 'F' }, { label: 'Outro', value: 'O' }, { label: 'Prefiro não informar', value: 'N' }];
   turmasDisponiveis: any[] = [];
   alunoId!: number;
-  isDeletavel: boolean = false;
-  isEditavel: boolean = false;
-  isSalvavel: boolean = true;
+  isDeletavel!: boolean;
+  isEditavel!: boolean;
+  isSalvavel!: boolean;
   constructor(private fb: FormBuilder, private http: HttpClient, private messageService: MessageService, private router: Router, private userService: UserService, private turmaService: TurmaService, private route: ActivatedRoute, private confirmationService: ConfirmationService) {}
 
   ngOnInit(): void {
@@ -71,9 +71,16 @@ export class CadastroAlunoComponent implements OnInit{
 
     this.route.queryParams.subscribe(params => {
       const id = params['id'];
-      if (id) {
+      if (id && !isNaN(+id)) {
         this.alunoId = +id;
         this.carregarAluno(this.alunoId);
+        this.isEditavel = true;
+        this.isDeletavel = true;
+        this.isSalvavel = false;
+      }else {
+        this.isEditavel = false;
+        this.isDeletavel = false;
+        this.isSalvavel = true
       }
     });
   }
@@ -102,16 +109,10 @@ export class CadastroAlunoComponent implements OnInit{
         turmas: aluno.turmas
       });
   
-      this.enableButtons();
       this.atualizarValidacaoTurmas()
     });
   }
-  
-  enableButtons(): void {
-    this.isDeletavel = true;
-    this.isEditavel = true;
-    this.isSalvavel = false;
-  }
+
 
   buscarEndereco(): void {
     const cep = this.alunoForm.get('cep')?.value;

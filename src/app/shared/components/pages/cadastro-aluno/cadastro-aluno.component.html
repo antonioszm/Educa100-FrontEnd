@@ -152,9 +152,9 @@
     </div>
     <p-confirmDialog header="Confirmação" icon="pi pi-exclamation-triangle"></p-confirmDialog>
     <div class="buttons">
-      <button pButton type="submit" label="Salvar" (onClick)="showSuccess()" [disabled]="!isSalvavel &&!alunoForm.valid"></button>
-      <button pButton type="button" label="Editar" (click)="atualizarAluno()" disabled [disabled]="!isEditavel && !alunoForm.valid"></button>
-      <button pButton type="button" label="Deletar" (click)="confirmDeletarAluno()"disabled [disabled]="!isDeletavel && !alunoForm.valid"></button>
+      <button pButton type="submit" label="Salvar" (onClick)="showSuccess()" disabled [disabled]="!isSalvavel || !alunoForm.valid"></button>
+      <button pButton type="button" label="Editar" (click)="atualizarAluno()" disabled [disabled]="!isEditavel || !alunoForm.valid"></button>
+      <button pButton type="button" label="Deletar" (click)="confirmDeletarAluno()"disabled [disabled]="!isDeletavel || !alunoForm.valid"></button>
     </div>
   </form>
 </div>

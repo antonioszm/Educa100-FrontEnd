@@ -35,4 +35,7 @@ export class LoginComponent {
       }
     });
   }
+  emContrucao(){
+    this.messageService.add({ severity: 'info', summary: 'Aviso', detail: 'Esta funcionalidade está em construção.' });
+  }
 }

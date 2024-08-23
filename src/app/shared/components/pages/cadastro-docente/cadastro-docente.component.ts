@@ -32,9 +32,9 @@ export class CadastroDocenteComponent implements OnInit{
     { label: 'SQL', value: 'SQL' }
   ];
   docenteId!: number;
-  isDeletavel: boolean = false;
-  isEditavel: boolean = false;
-  isSalvavel: boolean = true;
+  isDeletavel!: boolean;
+  isEditavel!: boolean;
+  isSalvavel!: boolean;
 
 
 
@@ -70,9 +70,16 @@ export class CadastroDocenteComponent implements OnInit{
 
     this.route.queryParams.subscribe(params => {
       const id = params['id'];
-      if (id) {
+      if (id && !isNaN(+id)) {
         this.docenteId = +id;
         this.carregarDocente(this.docenteId);
+        this.isEditavel = true;
+        this.isDeletavel = true;
+        this.isSalvavel = false;
+      }else {
+        this.isEditavel = false;
+        this.isDeletavel = false;
+        this.isSalvavel = true
       }
     });
   }
@@ -102,14 +109,7 @@ export class CadastroDocenteComponent implements OnInit{
         pontoDeReferencia: docente.pontoDeReferencia,
         materias: docente.materias.split(', ')
       });
-      this.enableButtons();
     });
-  }
-
-  enableButtons(): void {
-    this.isDeletavel = true;
-    this.isEditavel = true;
-    this.isSalvavel = false;
   }
 
 

@@ -1,6 +1,10 @@
 # Educa100FrontEnd
 
 Este projeto é uma aplicação web desenvolvida em Angular que simula um portal educacional, inspirado no projeto Educa100 em Java. O sistema suporta três tipos de usuários: alunos, professores e administradores, cada um com funcionalidades específicas.
+
+### Problemas que ele resolve
+Esse software foi desenvolvido para a gestão de escolas. Ele resolve o problema da burocracia no cadastro de turmas, alunos, notas e docentes, permitindo que o usuário possa realizar esses cadastros em seu computador pessoal ou até mesmo no celular. Outro problema solucionado está na área dos alunos, que podem acessar suas notas facilmente pelo computador ou celular.
+
 ## Tecnologias 
 - Angular 18
 - TypeScript
@@ -82,3 +86,6 @@ Este comando instalará a versão mais recente do Angular CLI, permitindo que vo
 ## Uso da Biblioteca Externa NG Prime
 
 Neste projeto, foi utilizada a biblioteca externa NG Prime para melhorar a interface do usuário com componentes prontos e estilizados.
+
+## Melhorias que podiam ser aplicadas
+A implementação de uma lista de turmas e outra de notas, com a possibilidade de edição e exclusão, além de funcionalidades adicionais para a página inicial do aluno, como o calendário de futuras provas. Além disso, uma maior estilização em SCSS, tornando o site mais agradável esteticamente e decorando as telas predominantemente brancas.

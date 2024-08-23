@@ -88,4 +88,4 @@ Este comando instalará a versão mais recente do Angular CLI, permitindo que vo
 Neste projeto, foi utilizada a biblioteca externa NG Prime para melhorar a interface do usuário com componentes prontos e estilizados.
 
 ## Melhorias que podiam ser aplicadas
-A implementação de uma lista de turmas e outra de notas, com a possibilidade de edição e exclusão, além de funcionalidades adicionais para a página inicial do aluno, como o calendário de futuras provas. Além disso, será aplicada uma maior estilização em SCSS, tornando o site mais agradável esteticamente e decorando as telas predominantemente brancas.
+A implementação de uma lista de turmas e outra de notas, com a possibilidade de edição e exclusão, além de funcionalidades adicionais para a página inicial do aluno, como o calendário de futuras provas. Além disso, uma maior estilização em SCSS, tornando o site mais agradável esteticamente e decorando as telas predominantemente brancas.

@@ -5,7 +5,7 @@
   </div>
   <div class="content">
     <div *ngIf="usuarioDocente || usuarioADM" class="SecaoDocente">
-      <h1>Bem-vindo, {{ nomeUsuario }}!</h1>
+      <h1>Bem-vindo, {{ usuarioLogado.nomeCompleto }}!</h1>
       <p-divider layout="horizontal" styleClass="flex md:hidden" [align]="'center'"></p-divider>
       <h2>Dados:</h2>
       <div class="dados-conteiner">
@@ -42,7 +42,7 @@
       </div>
     </div>
     <div *ngIf="usuarioAluno" class="SecaoAluno">
-      <h1>Bem-vindo , {{ nomeUsuario }}!</h1>
+      <h1>Bem-vindo , {{ usuarioLogado.nomeCompleto }}!</h1>
       <p-divider layout="horizontal" styleClass="flex md:hidden" [align]="'center'"></p-divider>
       <h2>Minhas Avaliações</h2>
       <div class="avaliacoes-listagem">

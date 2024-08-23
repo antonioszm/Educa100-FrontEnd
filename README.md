@@ -30,15 +30,24 @@ O sistema possui várias rotas para atender às diferentes necessidades dos usu�
 
 - `/login`: Rota para autenticação de usuários.
 - `/home`: Página inicial após o login.
-- `/cadastro-turma`: Para administradores criarem novas turmas.
-- `/cadastro-nota`: Para docentes registrarem notas dos alunos.
+- `/cadastro-turma`: Para administradores ou docentes criarem novas turmas.
+- `/cadastro-nota`: Para administradores ou docentes registrarem notas dos alunos.
 - `/cadastro-aluno`: Para administradores cadastrarem novos alunos.
 - `/cadastro-docente`: Para administradores cadastrarem novos docentes.
 - `/listagem-docente`: Para visualizar todos os docentes cadastrados.
 - `/notas-aluno`: Para alunos visualizarem suas notas.
 
 O sistema também implementa uma lógica de bloqueio de rotas baseada no tipo de usuário logado, garantindo que cada usuário só tenha acesso às funcionalidades permitidas para seu perfil.
-
+## Usuarios e Senhas
+- `ADM` 
+    - usuario: adm
+    - senha: 12345
+- `Docente` 
+    - usuario: jdrprofessor@outlook.com
+    - senha: 12345678
+- `Aluno` 
+    - usuario: antonioszm@outlook.com
+    - senha: 12345678
 ## Como Iniciar o Projeto
 
 Para iniciar este projeto, você precisará de dois terminais abertos simultaneamente:

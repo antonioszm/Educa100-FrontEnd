@@ -14,11 +14,13 @@ import { ToolbarComponent } from "../../toolbar/toolbar.component";
 import { TurmaService } from '../../../services/turma.service';
 import { ActivatedRoute } from '@angular/router'; 
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ProgressBarModule } from 'primeng/progressbar';
+
 
 @Component({
   selector: 'app-cadastro-aluno',
   standalone: true,
-  imports: [MultiSelectModule, CommonModule, DropdownModule, CalendarModule, ReactiveFormsModule, ToastModule, MessagesModule, ToolbarComponent, ConfirmDialogModule],
+  imports: [MultiSelectModule, CommonModule, DropdownModule, CalendarModule, ReactiveFormsModule, ToastModule, MessagesModule, ToolbarComponent, ConfirmDialogModule,ProgressBarModule],
   templateUrl: './cadastro-aluno.component.html',
   styleUrl: './cadastro-aluno.component.scss'
 })
@@ -30,6 +32,8 @@ export class CadastroAlunoComponent implements OnInit{
   isDeletavel!: boolean;
   isEditavel!: boolean;
   isSalvavel!: boolean;
+  carregando!: boolean;
+
   constructor(private fb: FormBuilder, private http: HttpClient, private messageService: MessageService, private router: Router, private userService: UserService, private turmaService: TurmaService, private route: ActivatedRoute, private confirmationService: ConfirmationService) {}
 
   ngOnInit(): void {
@@ -148,6 +152,7 @@ export class CadastroAlunoComponent implements OnInit{
           console.log('Usuário criado com sucesso');
           this.showSuccess();
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Aluno cadastrado com sucesso' });
+          this.carregando = true
           setTimeout(() => {
             this.router.navigate(['/home']);
           }, 3000); 
@@ -212,6 +217,7 @@ export class CadastroAlunoComponent implements OnInit{
           console.log('Aluno atualizado com sucesso');
           this.showSuccess();
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Aluno atualizado com sucesso' });
+          this.carregando = true
           setTimeout(() => {
             this.router.navigate(['/home']);
           }, 3000);
@@ -238,7 +244,10 @@ export class CadastroAlunoComponent implements OnInit{
           this.userService.removerUsuario(this.alunoId).subscribe({
             next: () => {
               this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Aluno removido com sucesso' });
-              this.router.navigate(['/home']);
+              this.carregando = true
+              setTimeout(() => {
+                this.router.navigate(['/home']);
+              }, 3000);
             },
             error: (error) => {
               this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao remover aluno.' });

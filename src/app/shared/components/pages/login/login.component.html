@@ -23,6 +23,9 @@
                     <a (click)="emContrucao()">Esqueci minha senha </a>
                 </div>
                 <p-button label="Entrar" styleClass="w-10rem mx-auto" (click)="verificarLogin()" />
+                <div class="carregamento" *ngIf="carregando">
+                    <p-progressBar mode="indeterminate" [style]="{ height: '6px' }" />
+                </div>
             </div>
             <div class="w-full md:w-2">
                 <p-divider layout="horizontal" styleClass="flex md:hidden" [align]="'center'">

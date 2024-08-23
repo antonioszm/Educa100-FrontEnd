@@ -151,6 +151,9 @@
       </div>
     </div>
     <p-confirmDialog header="Confirmação" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+    <div class="carregamento" *ngIf="carregando">
+      <p-progressBar mode="indeterminate" [style]="{ height: '6px' }" />
+    </div>
     <div class="buttons">
       <button pButton type="submit" label="Salvar" (onClick)="showSuccess()" disabled [disabled]="!isSalvavel || !alunoForm.valid"></button>
       <button pButton type="button" label="Editar" (click)="atualizarAluno()" disabled [disabled]="!isEditavel || !alunoForm.valid"></button>

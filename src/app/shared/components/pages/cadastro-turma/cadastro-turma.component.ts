@@ -14,12 +14,13 @@ import { ToolbarComponent } from "../../toolbar/toolbar.component";
 import { TurmaService } from '../../../services/turma.service';
 import { AuthService } from '../../../services/auth.service';
 import type { User } from '../../../models/user.model';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 
 @Component({
   selector: 'app-cadastro-turma',
   standalone: true,
-  imports: [MultiSelectModule, CommonModule, DropdownModule, CalendarModule, ReactiveFormsModule, ToastModule, MessagesModule, ToolbarComponent],
+  imports: [MultiSelectModule, CommonModule, DropdownModule, CalendarModule, ReactiveFormsModule, ToastModule, MessagesModule, ToolbarComponent, ProgressBarModule],
   templateUrl: './cadastro-turma.component.html',
   styleUrl: './cadastro-turma.component.scss'
 })
@@ -30,6 +31,8 @@ export class CadastroTurmaComponent {
   isDocente: boolean = false;
   usuarioLogado!: User
   professorLogado!: User
+  carregando!: boolean;
+
   constructor(
     private fb: FormBuilder,
     private messageService: MessageService,
@@ -105,6 +108,7 @@ export class CadastroTurmaComponent {
       this.turmaService.criarTurma(turma).subscribe({
         next: () => {
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Turma cadastrada com sucesso' });
+          this.carregando = true
           setTimeout(() => {
             this.router.navigate(['/home']);
           }, 3000); 

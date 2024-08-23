@@ -13,12 +13,13 @@ import { UserService } from '../../../services/user.service';
 import { ToolbarComponent } from "../../toolbar/toolbar.component";
 import { ActivatedRoute } from '@angular/router'; 
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 
 @Component({
   selector: 'app-cadastro-docente',
   standalone: true,
-  imports: [MultiSelectModule, CommonModule, DropdownModule, CalendarModule, ReactiveFormsModule, ToastModule, MessagesModule, ToolbarComponent, ConfirmDialogModule],
+  imports: [MultiSelectModule, CommonModule, DropdownModule, CalendarModule, ReactiveFormsModule, ToastModule, MessagesModule, ToolbarComponent, ConfirmDialogModule, ProgressBarModule],
   templateUrl: './cadastro-docente.component.html',
   styleUrl: './cadastro-docente.component.scss'
 })
@@ -35,6 +36,8 @@ export class CadastroDocenteComponent implements OnInit{
   isDeletavel!: boolean;
   isEditavel!: boolean;
   isSalvavel!: boolean;
+  carregando!: boolean;
+
 
 
 
@@ -148,6 +151,7 @@ export class CadastroDocenteComponent implements OnInit{
           console.log('Usuário criado com sucesso');
           this.showSuccess();
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Docente cadastrado com sucesso' });
+          this.carregando = true
           setTimeout(() => {
             this.router.navigate(['/home']);
           }, 3000); 
@@ -204,6 +208,7 @@ export class CadastroDocenteComponent implements OnInit{
           console.log('Usuário atualizado com sucesso');
           this.showSuccess();
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Docente atualizado com sucesso' });
+          this.carregando = true
           setTimeout(() => {
             this.router.navigate(['/home']);
           }, 3000); 
@@ -231,7 +236,10 @@ export class CadastroDocenteComponent implements OnInit{
           this.userService.removerUsuario(this.docenteId).subscribe({
             next: () => {
               this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Docente removido com sucesso' });
-              this.router.navigate(['/home']);
+              this.carregando = true
+              setTimeout(() => {
+                this.router.navigate(['/home']);
+              }, 3000);
             },
             error: (error) => {
               this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao remover docente.' });

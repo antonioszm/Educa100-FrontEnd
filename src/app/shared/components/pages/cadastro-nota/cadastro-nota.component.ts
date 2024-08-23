@@ -15,12 +15,12 @@ import { CommonModule } from '@angular/common';
 import { MessagesModule } from 'primeng/messages';
 import type { Turma } from '../../../models/turma.model';
 import { TurmaService } from '../../../services/turma.service';
-
+import { ProgressBarModule } from 'primeng/progressbar';
 
 @Component({
   selector: 'app-cadastro-nota',
   standalone: true,
-  imports: [MultiSelectModule, CommonModule, DropdownModule, CalendarModule, ReactiveFormsModule, ToastModule, MessagesModule, ToolbarComponent],
+  imports: [MultiSelectModule, CommonModule, DropdownModule, CalendarModule, ReactiveFormsModule, ToastModule, MessagesModule, ToolbarComponent,ProgressBarModule],
   templateUrl: './cadastro-nota.component.html',
   styleUrl: './cadastro-nota.component.scss'
 })
@@ -37,6 +37,7 @@ export class CadastroNotaComponent implements OnInit  {
   isDocente: boolean = false;
   turmasDisponiveis: Turma[] = [];
   alunoId!: number;
+  carregando!: boolean;
 
   constructor(private fb: FormBuilder,private messageService: MessageService,private router: Router,private userService: UserService,private authService: AuthService,private notaService: NotaService, private turmaService: TurmaService, private route: ActivatedRoute) {}
 
@@ -131,6 +132,7 @@ export class CadastroNotaComponent implements OnInit  {
       this.notaService.criarNota(nota).subscribe({
         next: () => {
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Avaliação cadastrada com sucesso' });
+          this.carregando = true
           setTimeout(() => {
             this.router.navigate(['/home']);
           }, 3000); 

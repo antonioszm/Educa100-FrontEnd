@@ -90,7 +90,9 @@
         </div>
       </div>
     </div>
-
+    <div class="carregamento" *ngIf="carregando">
+      <p-progressBar mode="indeterminate" [style]="{ height: '6px' }" />
+    </div>
     <div class="buttons">
       <button pButton type="submit" label="Salvar" [disabled]="!notaForm.valid  || notaForm.get('turma')?.hasError('invalidTurma') "></button>
       <button pButton type="button" label="Editar" disabled></button>

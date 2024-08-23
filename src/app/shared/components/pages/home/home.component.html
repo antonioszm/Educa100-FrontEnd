@@ -30,7 +30,7 @@
         <input pInputText type="text" placeholder="Buscar por nome, telefone ou e-mail" [(ngModel)]="filtroAluno" class="input-pesquisa"/>
       </div>
       <div class="alunos-listagem">
-        <p-card *ngFor="let aluno of filtrarAlunos()" header="{{ aluno.nomeCompleto }}" subheader="Idade: {{ calcularIdade(aluno.dataDeNascimento) }} anos">
+        <p-card *ngFor="let aluno of filtrarAlunos()" header="{{ aluno.nomeCompleto }}" subheader="Idade: {{ calcularIdade(aluno.dataNascimento) }} anos">
           <ng-template pTemplate="content">
             <p>Contato: {{ aluno.telefone || aluno.email }}</p>
           </ng-template>

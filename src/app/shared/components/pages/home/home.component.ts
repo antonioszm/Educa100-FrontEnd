@@ -76,6 +76,7 @@ export class HomeComponent {
     //funcoes Docente / ADM
     verificarAlunos(): void {
       this.userService.listarAlunos().subscribe(alunos => {
+        console.log(alunos);
         this.listaDeAlunos = alunos;
         this.numeroDeAlunos = this.listaDeAlunos.length
       });
@@ -101,21 +102,17 @@ export class HomeComponent {
       }
 
       const filtroLower = this.filtroAluno.toLowerCase();
-
       return this.listaDeAlunos.filter(aluno =>
         aluno.nomeCompleto.toLowerCase().includes(filtroLower) ||
         aluno.telefone?.includes(filtroLower) ||
-        aluno.email?.toLowerCase().includes(filtroLower)
+        aluno.email?.toLowerCase().includes(filtroLower) ||
+        aluno.dataNascimento?.includes(filtroLower) 
       );
     }
 
     calcularIdade(dataDeNascimento: Date): number {
-      const nascimento = new Date(dataDeNascimento);
-
-      console.log(dataDeNascimento)
-    
+      const nascimento = new Date(dataDeNascimento);    
       const hoje = new Date();
-    
       let idade = hoje.getFullYear() - nascimento.getFullYear();
       const mes = hoje.getMonth() - nascimento.getMonth();
     
@@ -138,15 +135,16 @@ export class HomeComponent {
       }
   } 
   verificarMaterias(): void {
-    this.usuarioLogado.turmas.forEach(turma => {
-      const listaMaterias = turma.professor.materias.split(',').map(materia => materia.trim());
-      listaMaterias.forEach(materia => {
-        if (!this.materiasCursando.includes(materia)) {
-          this.materiasCursando.push(materia);
-        }
+    if (this.usuarioLogado.papel === "ALUNO"){
+      this.usuarioLogado.turmas.forEach(turma => {
+        const listaMaterias = turma.professor.materias.split(',').map(materia => materia.trim());
+        listaMaterias.forEach(materia => {
+          if (!this.materiasCursando.includes(materia)) {
+            this.materiasCursando.push(materia);
+          }
+        });
       });
-    });
-    console.log(this.materiasCursando)
+    }
   } 
 
   redirecionarParaNota(avaliacao: Notas): void {

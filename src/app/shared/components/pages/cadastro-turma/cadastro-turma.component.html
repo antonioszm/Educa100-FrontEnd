@@ -54,7 +54,9 @@
         </div>
       </div>
     </div>
-
+    <div class="carregamento" *ngIf="carregando">
+      <p-progressBar mode="indeterminate" [style]="{ height: '6px' }" />
+    </div>
     <!-- Botões -->
     <div class="buttons">
       <button pButton type="submit" label="Salvar" [disabled]="!turmaForm.valid"></button>

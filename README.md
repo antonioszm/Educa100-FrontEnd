@@ -1,27 +1,91 @@
 # Educa100FrontEnd
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.0.
+Este projeto é uma aplicação web desenvolvida em Angular que simula um portal educacional, inspirado no projeto Educa100 em Java. O sistema suporta três tipos de usuários: alunos, professores e administradores, cada um com funcionalidades específicas.
 
-## Development server
+### Problemas que ele resolve
+Esse software foi desenvolvido para a gestão de escolas. Ele resolve o problema da burocracia no cadastro de turmas, alunos, notas e docentes, permitindo que o usuário possa realizar esses cadastros em seu computador pessoal ou até mesmo no celular. Outro problema solucionado está na área dos alunos, que podem acessar suas notas facilmente pelo computador ou celular.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Tecnologias 
+- Angular 18
+- TypeScript
+- SCSS
+- HTML
+- JSON
+- Metodología GitFLow
+- Kanban/Trello
 
-## Code scaffolding
+## Funcionalidades
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Administradores
+- Criar, deletar e atualizar informações de alunos e docentes.
+- Criar turmas.
+- Visualizar todos os docentes e alunos cadastrados.
 
-## Build
+### Docentes
+- Criar notas para os alunos.
+- Visualizar todos os alunos.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Alunos
+- Visualizar suas próprias notas.
 
-## Running unit tests
+## Rotas Disponíveis
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+O sistema possui várias rotas para atender às diferentes necessidades dos usuários:
 
-## Running end-to-end tests
+- `/login`: Rota para autenticação de usuários.
+- `/home`: Página inicial após o login.
+- `/cadastro-turma`: Para administradores ou docentes criarem novas turmas.
+- `/cadastro-nota`: Para administradores ou docentes registrarem notas dos alunos.
+- `/cadastro-aluno`: Para administradores cadastrarem novos alunos.
+- `/cadastro-docente`: Para administradores cadastrarem novos docentes.
+- `/listagem-docente`: Para visualizar todos os docentes cadastrados.
+- `/notas-aluno`: Para alunos visualizarem suas notas.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+O sistema também implementa uma lógica de bloqueio de rotas baseada no tipo de usuário logado, garantindo que cada usuário só tenha acesso às funcionalidades permitidas para seu perfil.
+## Usuarios e Senhas
+- `ADM` 
+    - usuario: adm
+    - senha: 12345
+- `Docente` 
+    - usuario: jdrprofessor@outlook.com
+    - senha: 12345678
+- `Aluno` 
+    - usuario: antonioszm@outlook.com
+    - senha: 12345678
+## Como Iniciar o Projeto
 
-## Further help
+Para iniciar este projeto, você precisará de dois terminais abertos simultaneamente:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+``` ng serve ```
+
+``` npx json-server --watch db.json ```
+
+Antes de iniciar o projeto, certifique-se de instalar todas as dependências necessárias executando o seguinte comando na raiz do projeto:
+
+``` npm install ```
+
+## Instalação das Dependências
+
+Para baixar e instalar todas as dependências necessárias para o projeto, siga os passos abaixo:
+
+1. Abra um terminal na pasta do projeto.
+2. Execute o comando `npm install`.
+3. Após a conclusão da instalação, você pode prosseguir com os passos descritos anteriormente para iniciar o projeto.
+
+## Instalação do Angular CLI
+
+Se você ainda não tem o Angular CLI instalado globalmente em sua máquina, siga os passos abaixo para instalá-lo:
+
+1. Abra um terminal.
+2. Execute o seguinte comando para instalar o Angular CLI globalmente:
+
+``` npm install -g @angular/cli```
+
+Este comando instalará a versão mais recente do Angular CLI, permitindo que você crie novos projetos Angular, gere componentes, serviços e muito mais.
+
+## Uso da Biblioteca Externa NG Prime
+
+Neste projeto, foi utilizada a biblioteca externa NG Prime para melhorar a interface do usuário com componentes prontos e estilizados.
+
+## Melhorias que podiam ser aplicadas
+A implementação de uma lista de turmas e outra de notas, com a possibilidade de edição e exclusão, além de funcionalidades adicionais para a página inicial do aluno, como o calendário de futuras provas. Além disso, uma maior estilização em SCSS, tornando o site mais agradável esteticamente e decorando as telas predominantemente brancas.

@@ -1,0 +1,71 @@
+<app-toolbar></app-toolbar>
+<div class="container">
+  <div class="image-left">
+    <img src="esquerda.png" alt="Imagem de uma Mulher estudante" />
+  </div>
+  <div class="content">
+    <div *ngIf="usuarioDocente || usuarioADM" class="SecaoDocente">
+      <h1>Bem-vindo, {{ usuarioLogado.nomeCompleto }}!</h1>
+      <p-divider layout="horizontal" styleClass="flex md:hidden" [align]="'center'"></p-divider>
+      <h2>Dados:</h2>
+      <div class="dados-conteiner">
+        <div class="dados">
+          <p-card>
+            <p>{{ numeroDeAlunos }}</p>
+            <h3>Número de Alunos</h3>
+          </p-card>
+          <p-card>
+            <p>{{ numeroDeDocentes }}</p>
+            <h3>Número de Docentes</h3>
+          </p-card>
+          <p-card>
+            <p>{{ numeroDeTurmas }}</p>
+            <h3>Número de Turmas</h3>
+          </p-card>
+        </div>
+      </div>
+      <p-divider layout="horizontal" styleClass="flex md:hidden" [align]="'center'"></p-divider>
+      <h2>Pesquisar Aluno:</h2>
+      <div>
+        <input pInputText type="text" placeholder="Buscar por nome, telefone ou e-mail" [(ngModel)]="filtroAluno" class="input-pesquisa"/>
+      </div>
+      <div class="alunos-listagem">
+        <p-card *ngFor="let aluno of filtrarAlunos()" header="{{ aluno.nomeCompleto }}" subheader="Idade: {{ calcularIdade(aluno.dataNascimento) }} anos">
+          <ng-template pTemplate="content">
+            <p>Contato: {{ aluno.telefone || aluno.email }}</p>
+          </ng-template>
+          <ng-template pTemplate="footer">
+            <p-button *ngIf="usuarioADM" label="Ver mais" styleClass="p-button-success w-10rem" (click)="redirecionarCadastro(aluno.id)" />
+            <p-button *ngIf="usuarioDocente" label="Lançar nota" styleClass="p-button-success w-10rem" (click)="redirecionarParaLancarNota(aluno.id)" />
+          </ng-template>
+        </p-card>
+      </div>
+    </div>
+    <div *ngIf="usuarioAluno" class="SecaoAluno">
+      <h1>Bem-vindo , {{ usuarioLogado.nomeCompleto }}!</h1>
+      <p-divider layout="horizontal" styleClass="flex md:hidden" [align]="'center'"></p-divider>
+      <h2>Minhas Avaliações</h2>
+      <div class="avaliacoes-listagem">
+        <p-card *ngFor="let avaliacao of listaDeAvaliacoes" class="avaliacao-card" (click)="redirecionarParaNota(avaliacao)" header="{{ avaliacao.nomeDaAvaliacao }}" subheader="{{ avaliacao.nomeDaMateria }}">
+          <ng-template pTemplate="content">
+            <p><strong>Nota:</strong> {{ avaliacao.nota }}</p>
+            <p><strong>Data:</strong> {{ avaliacao.dataAvaliacao | date:'dd/MM/yyyy' }}</p>
+          </ng-template>
+        </p-card>
+      </div>
+      <p-divider layout="horizontal" styleClass="flex md:hidden" [align]="'center'"></p-divider>
+      <h2>Minhas Matérias</h2>
+      <div class="materias-listagem">
+        <p-card *ngFor="let materia of materiasCursando.slice(0, 3)" class="materia-card" header="{{ materia }}"></p-card>
+      </div>
+      <p-divider layout="horizontal" styleClass="flex md:hidden" [align]="'center'"></p-divider>
+      <h2>Cursos Extras</h2>
+      <div class="cursos-listagem">
+        <p-card *ngFor="let curso of cursosExtras" class="curso-card" header="{{ curso }}"></p-card>
+      </div>
+    </div>
+  </div>
+  <div class="image-right">
+    <img src="direita.png" alt="Imagem de um menino levantando a mão" />
+  </div>
+</div>

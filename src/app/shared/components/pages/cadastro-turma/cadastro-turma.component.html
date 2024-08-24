@@ -1,0 +1,67 @@
+<app-toolbar></app-toolbar>
+<div class="container">
+  <h2>Cadastro de Turma</h2>
+  <form [formGroup]="turmaForm" (ngSubmit)="onSubmit()">
+    
+    <!-- Informações da Turma -->
+    <div class="form-section">
+      <h3>Informações da Turma</h3>
+      <div class="form-grid">
+        <div class="field">
+          <label for="nome">Nome da Turma</label>
+          <input id="nome" type="text" pInputText formControlName="nome" />
+          <div *ngIf="turmaForm.get('nome')?.invalid && turmaForm.get('nome')?.touched">
+            <small class="p-error">Nome da turma deve ter entre 8 e 64 caracteres.</small>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="dataInicio">Data de Início</label>
+          <p-calendar id="dataInicio" formControlName="dataInicio" dateFormat="dd/mm/yy" showIcon="true"></p-calendar>
+          <div *ngIf="turmaForm.get('dataInicio')?.invalid && turmaForm.get('dataInicio')?.touched">
+            <small class="p-error">Data de início é obrigatória.</small>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="dataTermino">Data de Término</label>
+          <p-calendar id="dataTermino" formControlName="dataTermino" dateFormat="dd/mm/yy" showIcon="true"></p-calendar>
+          <div *ngIf="turmaForm.get('dataTermino')?.invalid && turmaForm.get('dataTermino')?.touched">
+            <small class="p-error">Data de término é obrigatória.</small>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="horario">Horário da Turma</label>
+          <p-calendar id="horario" formControlName="horario" timeOnly="true" hourFormat="24" showIcon="false"></p-calendar>
+          <div *ngIf="turmaForm.get('horario')?.invalid && turmaForm.get('horario')?.touched">
+            <small class="p-error">Horário é obrigatório.</small>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="professor">Professor</label>
+          <p-dropdown 
+            [options]="professoresDisponiveis" 
+            formControlName="professor" 
+            placeholder="Selecione um professor"
+            optionLabel="nomeCompleto" 
+            [disabled]="isDocente">
+          </p-dropdown>
+          <div *ngIf="turmaForm.get('professor')?.invalid && turmaForm.get('professor')?.touched">
+            <small class="p-error">Professor é obrigatório.</small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carregamento" *ngIf="carregando">
+      <p-progressBar mode="indeterminate" [style]="{ height: '6px' }" />
+    </div>
+    <!-- Botões -->
+    <div class="buttons">
+      <button pButton type="submit" label="Salvar" [disabled]="!turmaForm.valid"></button>
+      <button pButton type="button" label="Editar" disabled></button>
+      <button pButton type="button" label="Deletar" disabled></button>
+    </div>
+  </form>
+</div>

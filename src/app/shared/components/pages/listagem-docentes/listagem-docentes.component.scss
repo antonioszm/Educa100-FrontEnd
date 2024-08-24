@@ -1,0 +1,77 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.search-bar {
+  margin-bottom: 20px;
+
+  input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  input:focus {
+    border-color: #66afe9;
+    outline: none;
+    box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+  }
+}
+
+.docentes-lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+p-card {
+  width: 100%;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  .p-card-header {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .p-card-subheader {
+    font-size: 16px;
+    color: #666;
+    margin-top: 5px;
+  }
+
+  .p-card-content {
+    padding: 10px 0;
+
+    p {
+      font-size: 14px;
+      color: #555;
+      margin: 5px 0;
+    }
+  }
+
+  .p-card-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10px;
+
+    p-button {
+      width: 10rem;
+      margin-left: 10px;
+    }
+  }
+}

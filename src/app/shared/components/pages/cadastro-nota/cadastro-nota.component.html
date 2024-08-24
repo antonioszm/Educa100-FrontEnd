@@ -1,0 +1,102 @@
+<app-toolbar></app-toolbar>
+<div class="container">
+  <h2>Cadastro de Avaliação/Nota</h2>
+  <form [formGroup]="notaForm" (ngSubmit)="onSubmit()">
+
+    <!-- Informações da Avaliação/Nota -->
+    <div class="form-section">
+      <h3>Informações da Avaliação</h3>
+      <div class="form-grid">
+        <!-- Professor -->
+        <div class="field">
+          <label for="professor">Professor</label>
+          <p-dropdown 
+            [options]="professoresDisponiveis" 
+            formControlName="professor" 
+            placeholder="Selecione um professor"
+            optionLabel="nomeCompleto" 
+            [disabled]="isDocente">
+          </p-dropdown>
+          <div *ngIf="notaForm.get('professor')?.invalid && notaForm.get('professor')?.touched">
+            <small class="p-error">Professor é obrigatório.</small>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="nomeDaMateria">Nome da Matéria</label>
+          <p-dropdown 
+            [options]="materiasDisponiveis" 
+            formControlName="nomeDaMateria" 
+            placeholder="Selecione uma matéria">
+          </p-dropdown>
+          <div *ngIf="notaForm.get('nomeDaMateria')?.invalid && notaForm.get('nomeDaMateria')?.touched">
+            <small class="p-error">Nome da matéria é obrigatório.</small>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="nomeDaAvaliacao">Nome da Avaliação</label>
+          <input id="nomeDaAvaliacao" type="text" pInputText formControlName="nomeDaAvaliacao" />
+          <div *ngIf="notaForm.get('nomeDaAvaliacao')?.invalid && notaForm.get('nomeDaAvaliacao')?.touched">
+            <small class="p-error">Nome da avaliação é obrigatório.</small>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="dataAvaliacao">Data da Avaliação</label>
+          <p-calendar id="dataAvaliacao" formControlName="dataAvaliacao" dateFormat="dd/mm/yy" showIcon="true"></p-calendar>
+          <div *ngIf="notaForm.get('dataAvaliacao')?.invalid && notaForm.get('dataAvaliacao')?.touched">
+            <small class="p-error">Data da avaliação é obrigatória.</small>
+          </div>
+        </div>
+
+        <!-- Aluno -->
+        <div class="field">
+          <label for="aluno">Aluno</label>
+          <p-dropdown 
+            [options]="alunosDisponiveis" 
+            formControlName="aluno" 
+            placeholder="Selecione um aluno"
+            optionLabel="nomeCompleto" 
+            filter="true"
+            onselect="carregarTurmas(aluno)">
+          </p-dropdown>
+          <div *ngIf="notaForm.get('aluno')?.invalid && notaForm.get('aluno')?.touched">
+            <small class="p-error">Aluno é obrigatório.</small>
+          </div>
+        </div>
+
+        <!-- Turma -->
+        <div class="field">
+          <label for="turma">Turma</label>
+          <p-dropdown 
+            [options]="turmasDisponiveis" 
+            formControlName="turma" 
+            placeholder="Selecione uma turma"
+            optionLabel="nome">
+          </p-dropdown>
+          <div *ngIf="notaForm.get('turma')?.invalid && notaForm.get('turma')?.touched">
+            <small class="p-error">Turma é obrigatória e tanto o Aluno quanto o Professor devem estar nela.</small>
+          </div>
+        </div>
+
+        <!-- Nota da Avaliação -->
+        <div class="field">
+          <label for="nota">Nota Avaliação</label>
+          <input id="nota" type="number" pInputText formControlName="nota" min="0" max="10" />
+          <div *ngIf="notaForm.get('nota')?.invalid && notaForm.get('nota')?.touched">
+            <small class="p-error">Nota deve ser um valor entre 0 e 10.</small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carregamento" *ngIf="carregando">
+      <p-progressBar mode="indeterminate" [style]="{ height: '6px' }" />
+    </div>
+    <div class="buttons">
+      <button pButton type="submit" label="Salvar" [disabled]="!notaForm.valid  || notaForm.get('turma')?.hasError('invalidTurma') "></button>
+      <button pButton type="button" label="Editar" disabled></button>
+      <button pButton type="button" label="Deletar" disabled></button>
+    </div>
+  </form>
+</div>
